@@ -1,0 +1,39 @@
+<ion-content class="ion-padding">
+
+  <form [formGroup]="formLogin" (submit)="aoClicarEntrar(authProviders.Email)">
+
+    <ng-container *ngIf="!configs.isSignIn">
+      <ion-item>
+        <ion-icon name="person" slot="start"></ion-icon>
+        <ion-input type="text" placeholder="Nome" formControlName="nome"></ion-input>
+        <ion-note slot="end" color="danger" *ngIf="nome.dirty && nome.hasError('required')">Obrigatório!
+        </ion-note>
+        <ion-note slot="end" color="danger" *ngIf="nome.dirty && nome.hasError('minlength')">Min 3 Caracteres!
+        </ion-note>
+      </ion-item>
+    </ng-container>
+
+    <ion-item>
+      <ion-icon name="mail" slot="start"></ion-icon>
+      <ion-input type="mail" placeholder="E-mail" formControlName="email" inputmode="email" autofocus="true">
+      </ion-input>
+      <ion-note slot="end" color="danger" *ngIf="email.dirty && email.hasError('required')">Obrigatório!</ion-note>
+      <ion-note slot="end" color="danger" *ngIf="email.dirty && email.hasError('email')">E-mail inválido!</ion-note>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon name="lock" slot="start"></ion-icon>
+      <ion-input type="password" placeholder="Senha" formControlName="password"></ion-input>
+      <ion-note slot="end" color="danger" *ngIf="password.dirty && password.hasError('required')">Obrigatório!
+      </ion-note>
+      <ion-note slot="end" color="danger" *ngIf="password.dirty && password.hasError('minlength')">Min 6 Caracteres!
+      </ion-note>
+    </ion-item>
+
+    <ion-button type="submit" expand="full" [disabled]="formLogin.invalid">{{configs.acao}}</ion-button>
+  </form>
+
+
+  <ion-button expand="full" fill="clear" (click)="mudarAuthAcao()">{{configs.mudarAcao}}</ion-button>
+
+</ion-content>
