@@ -4,6 +4,8 @@ import { auth } from 'firebase';
 import { User, AuthOptions, AuthProvider } from './auth.types';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import * as firebase from 'firebase';
+
 
 @Injectable({
   providedIn: 'root'
@@ -34,9 +36,9 @@ export class AuthService {
     return this.angularFireAuth.auth.signOut();
   }
 
-  private entrarComEmaileSenha({ email, password }: User): Promise<auth.UserCredential> {
+  private entrarComEmaileSenha({ email, password }: User): Promise<auth.UserCredential> {    
+    
     return this.angularFireAuth.auth.signInWithEmailAndPassword(email, password);
-
   }
 
   private criarContaComEmail({ email, password, nome }: User): Promise<auth.UserCredential> {

@@ -5,17 +5,23 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { RouteReuseStrategy } from '@angular/router';
 import { AngularFireModule } from '@angular/fire';
-import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from 'src/environments/environment';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+
 
 
 
 @NgModule({
   declarations: [],
   imports: [
-    IonicModule.forRoot(),
+    IonicModule.forRoot(),    
+    AngularFireAuthModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireAuthModule
+    AngularFirestoreModule.enablePersistence({
+      synchronizeTabs: true
+    })
+    
   ],
   exports: [
     BrowserModule,

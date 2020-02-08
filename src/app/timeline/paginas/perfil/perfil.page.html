@@ -7,3 +7,13 @@
     </app-botao-logout>
   </ion-toolbar>
 </ion-header>
+
+<ion-content class="ion-padding">
+  <div class="foto-perfil">
+    <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+    <div *ngIf="user">
+      <h3>Bem-vindo, {{ user.displayName }}</h3>
+      <h6>{{ user.email }}</h6>
+    </div>
+  </div>
+</ion-content>
