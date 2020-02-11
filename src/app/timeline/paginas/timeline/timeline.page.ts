@@ -7,6 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TimelinePage implements OnInit {
 
+  slidesOptions = {
+    slidesPerView: 3
+  };
+
   constructor() { }
 
   ngOnInit() {

@@ -1,0 +1,25 @@
+.single-post-home {
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-bottom: 10px;
+    padding-top: 10px;
+    width: 100%;
+    box-shadow: 1px 1px rgba(160, 160, 160, 0.453);
+  }
+  
+  .logo {
+    height: 44px;
+  }
+  
+  .poster1_card {
+    width: 140px;
+    height: 180px;
+    background-size: cover;
+  }
+  .card2 {
+    width: 180px;
+    height: 80px;
+    background: linear-gradient(#cc3300,#ff6666),
+    url('/assets/img/shingeki-no-kyojin.jpg');
+    background-size: cover;
+  }

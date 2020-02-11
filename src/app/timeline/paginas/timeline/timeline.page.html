@@ -1,11 +1,105 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Timeline</ion-title>
+<ion-header no-border>
+  <ion-toolbar color="white">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-img src="assets/img/prattika-logo.png" class="logo"></ion-img>
     <app-botao-logout slot="end">
     </app-botao-logout>
   </ion-toolbar>
+  <ion-fab vertical="bottom" horizontal="start" slot="fixed">
+    <ion-fab-button>
+      <ion-icon name="create"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="bottom">
+      <ion-fab-button (click)="captureVideo()">
+        <ion-icon name="videocam"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button>
+        <ion-icon name="paper"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button (click)="captureAudio()">
+        <ion-icon name="microphone"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
 </ion-header>
 
 <ion-content>
+  <ion-item lines="none">
+    <p slot="start">Textos</p>
+    <ion-icon name="arrow-forward" slot="end"></ion-icon>
+  </ion-item>
+
+  <ion-slides [options]="slidesOptions">
+    <ion-slide>
+      <ion-card [style.backgroundImage]="'url(./assets/img/shingeki-no-kyojin.jpg)'" class="poster1_card"></ion-card>
+    </ion-slide>
+
+    <ion-slide>
+      <ion-card [style.backgroundImage]="'url(./assets/img/nanatsu-no-taizai.jpg)'" class="poster1_card"></ion-card>
+    </ion-slide>
+
+    <ion-slide>
+      <ion-card [style.backgroundImage]="'url(./assets/img/lucifer.jpg)'" class="poster1_card"></ion-card>
+    </ion-slide>
+
+    <ion-slide>
+      <ion-card [style.backgroundImage]="'url(./assets/img/narcos.jpg)'" class="poster1_card"></ion-card>
+    </ion-slide>
+  </ion-slides>
+
+  <ion-item lines="none">
+    <p slot="start">Vídeos</p>
+    <ion-icon name="arrow-forward" slot="end"></ion-icon>
+  </ion-item>
+  <ion-slides [options]="slidesOptions">
+    <ion-slide>
+      <ion-card [style.backgroundImage]="'url(./assets/img/shingeki-no-kyojin.jpg)'" class="poster1_card"></ion-card>
+    </ion-slide>
+
+    <ion-slide>
+      <ion-card [style.backgroundImage]="'url(./assets/img/nanatsu-no-taizai.jpg)'" class="poster1_card"></ion-card>
+    </ion-slide>
+
+    <ion-slide>
+      <ion-card [style.backgroundImage]="'url(./assets/img/lucifer.jpg)'" class="poster1_card"></ion-card>
+    </ion-slide>
+
+    <ion-slide>
+      <ion-card [style.backgroundImage]="'url(./assets/img/narcos.jpg)'" class="poster1_card"></ion-card>
+    </ion-slide>
+  </ion-slides>
+  <!-- pegar postagens -->
+  <!-- <ion-slides  [options]="slidesOptions">
+    <ion-slide *ngFor="let postagem of listapostagens">
+      <ion-card class="poster1_card" [routerLink]="['/detalhes/' + postagem.id]" routerdirection="forward">
+        <img [src]="postagem.imagem">
+      </ion-card>
+    </ion-slide>
+  </ion-slides> -->
+
+  <ion-item lines="none">
+    <p slot="start">Áudios</p>
+    <ion-icon name="arrow-forward" slot="end"></ion-icon>
+  </ion-item>
+
+  <ion-slides [options]="slidesOptions">
+    <ion-slide>
+      <ion-card [style.backgroundImage]="'url(./assets/img/shingeki-no-kyojin.jpg)'" class="poster1_card"></ion-card>
+    </ion-slide>
+
+    <ion-slide>
+      <ion-card [style.backgroundImage]="'url(./assets/img/nanatsu-no-taizai.jpg)'" class="poster1_card"></ion-card>
+    </ion-slide>
+
+    <ion-slide>
+      <ion-card [style.backgroundImage]="'url(./assets/img/lucifer.jpg)'" class="poster1_card"></ion-card>
+    </ion-slide>
+
+    <ion-slide>
+      <ion-card [style.backgroundImage]="'url(./assets/img/narcos.jpg)'" class="poster1_card"></ion-card>
+    </ion-slide>
+  </ion-slides>
 
 </ion-content>

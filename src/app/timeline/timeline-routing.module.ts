@@ -19,7 +19,11 @@ const routes: Routes = [
   {
     path: 'timeline',
     loadChildren: () => import('./paginas/timeline/timeline.module').then( m => m.TimelinePageModule)
+  },  {
+    path: 'add-postagem',
+    loadChildren: () => import('./paginas/add-postagem/add-postagem.module').then( m => m.AddPostagemPageModule)
   }
+
 ];
 
 
