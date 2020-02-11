@@ -9,6 +9,16 @@ const routes: Routes = [
     component: PaginaPrincipalPage,
     children: [
       {
+        path: 'timeline',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+              import('../timeline/timeline.module').then(m => m.TimelinePageModule)
+          }
+        ]
+      },
+      {
         path: 'postagens',
         children: [
           {
@@ -29,25 +39,15 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'timeline',
-        children: [
-          {
-            path: '',
-            loadChildren: () =>
-              import('../timeline/timeline.module').then(m => m.TimelinePageModule)
-          }
-        ]
-      },
-      {
         path: '',
-        redirectTo: '/painel/postagens',
+        redirectTo: '/inicio/painel/timeline',
         pathMatch: 'full'
       }
     ]
   },
   {
     path: '',
-    redirectTo: '/painel/postagens',
+    redirectTo: '/inicio/painel/timeline',
     pathMatch: 'full'
   }
 ];

@@ -11,7 +11,7 @@
 <ion-content class="ion-padding">
 
   <div class="foto-perfil">
-    <div *ngIf="user">
+    <div *ngIf="user" >
       <img [src]="user.photoURL" />      
       <h3>Bem-vindo, {{ user.displayName }}</h3>
       <h6>{{ user.email }}</h6>

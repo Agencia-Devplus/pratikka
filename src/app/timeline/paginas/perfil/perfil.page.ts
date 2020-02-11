@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { File } from '@ionic-native/file/ngx';
-import { Platform, LoadingController } from '@ionic/angular';
+import { Platform } from '@ionic/angular';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { OverlayService } from 'src/app/core/services/overlay.service';
 import * as firebase from 'firebase';
@@ -29,7 +29,6 @@ export class PerfilPage implements OnInit {
     private file: File,
     private storage: AngularFireStorage,
     private overlay: OverlayService,
-    private perfilService: PerfilService,
     private crop: Crop
   ) {
     this.auth.authState$.subscribe(user => (this.user = user));
@@ -123,7 +122,5 @@ export class PerfilPage implements OnInit {
         })
       })))
       .subscribe();
-
-
   }
 }

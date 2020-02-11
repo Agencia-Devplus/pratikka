@@ -12,18 +12,20 @@ const routes: Routes = [
         path: '',
         loadChildren: './paginas/pagina-principal/pagina-principal.module#PaginaPrincipalPageModule'
 
+      },
+      {
+        path: 'add-postagem',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+              import('../timeline/paginas/add-postagem/add-postagem.module').then(m => m.AddPostagemPageModule)
+          }
+        ]
       }
 
     ]
-  },
-  {
-    path: 'timeline',
-    loadChildren: () => import('./paginas/timeline/timeline.module').then( m => m.TimelinePageModule)
-  },  {
-    path: 'add-postagem',
-    loadChildren: () => import('./paginas/add-postagem/add-postagem.module').then( m => m.AddPostagemPageModule)
-  }
-
+  }  
 ];
 
 

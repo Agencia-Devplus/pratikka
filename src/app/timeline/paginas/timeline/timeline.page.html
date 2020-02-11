@@ -1,40 +1,7 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-<ion-header no-border>
-  <ion-toolbar color="white">
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
+<ion-header>
+  <ion-toolbar>
     <ion-img src="assets/img/prattika-logo.png" class="logo"></ion-img>
-    <app-botao-logout slot="end">
-    </app-botao-logout>
-=======
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Timeline</ion-title>    
->>>>>>> c64579bd36d55a0102b1736c5f5d1d7ede4c444b
-=======
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Timeline</ion-title>    
->>>>>>> c64579bd36d55a0102b1736c5f5d1d7ede4c444b
   </ion-toolbar>
-  <ion-fab vertical="bottom" horizontal="start" slot="fixed">
-    <ion-fab-button>
-      <ion-icon name="create"></ion-icon>
-    </ion-fab-button>
-    <ion-fab-list side="bottom">
-      <ion-fab-button (click)="captureVideo()">
-        <ion-icon name="videocam"></ion-icon>
-      </ion-fab-button>
-      <ion-fab-button>
-        <ion-icon name="paper"></ion-icon>
-      </ion-fab-button>
-      <ion-fab-button (click)="captureAudio()">
-        <ion-icon name="microphone"></ion-icon>
-      </ion-fab-button>
-    </ion-fab-list>
-  </ion-fab>
 </ion-header>
 
 <ion-content>
@@ -45,11 +12,13 @@
 
   <ion-slides [options]="slidesOptions">
     <ion-slide>
-      <ion-card [style.backgroundImage]="'url(./assets/img/shingeki-no-kyojin.jpg)'" class="poster1_card"></ion-card>
+      <ion-card [style.backgroundImage]="'url(./assets/img/shingeki-no-kyojin.jpg)'" class="poster1_card">
+      </ion-card>
     </ion-slide>
 
     <ion-slide>
-      <ion-card [style.backgroundImage]="'url(./assets/img/nanatsu-no-taizai.jpg)'" class="poster1_card"></ion-card>
+      <ion-card [style.backgroundImage]="'url(./assets/img/nanatsu-no-taizai.jpg)'" class="poster1_card">
+      </ion-card>
     </ion-slide>
 
     <ion-slide>
@@ -67,11 +36,13 @@
   </ion-item>
   <ion-slides [options]="slidesOptions">
     <ion-slide>
-      <ion-card [style.backgroundImage]="'url(./assets/img/shingeki-no-kyojin.jpg)'" class="poster1_card"></ion-card>
+      <ion-card [style.backgroundImage]="'url(./assets/img/shingeki-no-kyojin.jpg)'" class="poster1_card">
+      </ion-card>
     </ion-slide>
 
     <ion-slide>
-      <ion-card [style.backgroundImage]="'url(./assets/img/nanatsu-no-taizai.jpg)'" class="poster1_card"></ion-card>
+      <ion-card [style.backgroundImage]="'url(./assets/img/nanatsu-no-taizai.jpg)'" class="poster1_card">
+      </ion-card>
     </ion-slide>
 
     <ion-slide>
@@ -98,11 +69,13 @@
 
   <ion-slides [options]="slidesOptions">
     <ion-slide>
-      <ion-card [style.backgroundImage]="'url(./assets/img/shingeki-no-kyojin.jpg)'" class="poster1_card"></ion-card>
+      <ion-card [style.backgroundImage]="'url(./assets/img/shingeki-no-kyojin.jpg)'" class="poster1_card">
+      </ion-card>
     </ion-slide>
 
     <ion-slide>
-      <ion-card [style.backgroundImage]="'url(./assets/img/nanatsu-no-taizai.jpg)'" class="poster1_card"></ion-card>
+      <ion-card [style.backgroundImage]="'url(./assets/img/nanatsu-no-taizai.jpg)'" class="poster1_card">
+      </ion-card>
     </ion-slide>
 
     <ion-slide>
@@ -113,5 +86,4 @@
       <ion-card [style.backgroundImage]="'url(./assets/img/narcos.jpg)'" class="poster1_card"></ion-card>
     </ion-slide>
   </ion-slides>
-
 </ion-content>
