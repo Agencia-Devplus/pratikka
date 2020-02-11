@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
 
-import { Platform } from '@ionic/angular';
+import { Platform, NavController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { AuthService } from './core/services/auth.service';
+import { AngularFireAuth } from '@angular/fire/auth';
+
 
 @Component({
   selector: 'app-root',
@@ -10,18 +13,31 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
   styleUrls: ['app.component.scss']
 })
 export class AppComponent {
+  user: firebase.User;
   constructor(
+    private auth: AuthService,
+    private angularFireAuth: AngularFireAuth,
     private platform: Platform,
     private splashScreen: SplashScreen,
-    private statusBar: StatusBar
+    private statusBar: StatusBar,
+    private navCtrl: NavController
   ) {
     this.initializeApp();
   }
 
   initializeApp() {
+    
     this.platform.ready().then(() => {
-      this.statusBar.styleDefault();
-      this.splashScreen.hide();
+      this.angularFireAuth.auth.onAuthStateChanged(user =>{
+        if(user){
+          this.navCtrl.navigateForward('/inicio/painel/postagens');
+          this.splashScreen.hide();
+        } else {
+          this.navCtrl.navigateForward('/login');
+          this.splashScreen.hide();
+        }
+      });
+      this.statusBar.styleDefault();      
     });
   }
 }

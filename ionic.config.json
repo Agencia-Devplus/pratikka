@@ -1,5 +1,7 @@
 {
   "name": "prattika-new",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

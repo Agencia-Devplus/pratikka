@@ -7,3 +7,19 @@
     </app-botao-logout>
   </ion-toolbar>
 </ion-header>
+
+<ion-content class="ion-padding">
+
+  <div class="foto-perfil">
+    <div *ngIf="user">
+      <img [src]="user.photoURL" />      
+      <h3>Bem-vindo, {{ user.displayName }}</h3>
+      <h6>{{ user.email }}</h6>
+
+    </div>
+    <ion-button (click)="abrirGaleria()">
+      Trocar Foto
+    </ion-button>
+  </div>
+
+</ion-content>

@@ -9,7 +9,7 @@ const routes: Routes = [
     component: PaginaPrincipalPage,
     children: [
       {
-        path: 'tab1',
+        path: 'postagens',
         children: [
           {
             path: '',
@@ -19,7 +19,7 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'tab2',
+        path: 'perfil',
         children: [
           {
             path: '',
@@ -29,7 +29,7 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'tab3',
+        path: 'timeline',
         children: [
           {
             path: '',
@@ -40,14 +40,14 @@ const routes: Routes = [
       },
       {
         path: '',
-        redirectTo: '/painel/tab3',
+        redirectTo: '/painel/postagens',
         pathMatch: 'full'
       }
     ]
   },
   {
     path: '',
-    redirectTo: '/painel/tab3',
+    redirectTo: '/painel/postagens',
     pathMatch: 'full'
   }
 ];

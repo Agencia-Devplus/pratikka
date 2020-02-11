@@ -71,7 +71,7 @@ export class LoginPage implements OnInit {
         provider
       });
 
-      this.navCtrl.navigateForward(this.rotaAtiva.snapshot.queryParamMap.get('redirect') || '/inicio/painel/tab3');
+      this.navCtrl.navigateForward(this.rotaAtiva.snapshot.queryParamMap.get('redirect') || '/inicio/painel/postagens');
 
     } catch (e) {
       await this.overlayService.toast({
