@@ -37,8 +37,7 @@ export class AppComponent {
           this.splashScreen.hide();
         }
       });
-      this.statusBar.styleDefault();
-      
+      this.statusBar.styleDefault();      
     });
   }
 }
