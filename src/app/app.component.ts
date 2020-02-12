@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss']
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit {
   user: firebase.User;
   constructor(
     private auth: AuthService,
@@ -34,10 +34,10 @@ export class AppComponent implements OnInit{
     this.platform.ready().then(() => {
       this.angularFireAuth.auth.onAuthStateChanged(user => {
         if (user) {
-          this.navCtrl.navigateForward('/inicio/painel/timeline');
+          this.navCtrl.navigateRoot('/inicio/painel/timeline');
           this.splashScreen.hide();
         } else {
-          this.navCtrl.navigateForward('/login');
+          this.navCtrl.navigateRoot('/login');
           this.splashScreen.hide();
         }
       });
@@ -49,10 +49,12 @@ export class AppComponent implements OnInit{
     if (this.platform.is('android')) {
       this.platform.backButton.subscribeWithPriority(0, () => {
         console.log('this.router.url', this.router.url);
-        if (this.router.url === '/inicio/painel/timeline') {
+        if (this.router.url === '/inicio/painel/timeline' ||
+          this.router.url === '/inicio/painel/postagens' ||
+          this.router.url === '/inicio/painel/perfil') {
           navigator['app'].exitApp();
         } else {
-          this.navCtrl.navigateBack('/inicio/painel/timeline');
+          this.navCtrl.pop();
         }
       });
     }

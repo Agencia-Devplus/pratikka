@@ -12,13 +12,13 @@ export class OverlayService {
     private toastCtrl: ToastController
   ) { }
 
-  async alert(options?: AlertOptions): Promise<HTMLIonAlertElement>{
+  async alert(options?: AlertOptions): Promise<HTMLIonAlertElement> {
     const alert = await this.alertCtrl.create(options);
     await alert.present();
     return alert;
   };
 
-  async loading(options?: LoadingOptions): Promise<HTMLIonLoadingElement>{
+  async loading(options?: LoadingOptions): Promise<HTMLIonLoadingElement> {
     const loading = await this.loadingCtrl.create({
       message: 'Carregando...',
       ...options
@@ -31,8 +31,6 @@ export class OverlayService {
     const toast = await this.toastCtrl.create({
       position: 'bottom',
       duration: 3000,
-      showCloseButton: true,
-      closeButtonText: 'OK',
       ...options
     });
     await toast.present();
