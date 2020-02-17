@@ -12,6 +12,10 @@ import { Crop } from '@ionic-native/crop/ngx';
 import { Camera } from '@ionic-native/camera/ngx';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { MediaCapture } from '@ionic-native/media-capture/ngx';
+import { Media } from '@ionic-native/media/ngx';
+import { IonicStorageModule } from '@ionic/storage/';
+
 
 
 
@@ -25,7 +29,8 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
     AngularFireAuthModule,
     AngularFirestoreModule.enablePersistence({
       synchronizeTabs: true
-    })
+    }),
+    IonicStorageModule.forRoot()
   ],
   exports: [
     BrowserModule,
@@ -35,6 +40,8 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
     Camera,
     Crop,
     File,
+    MediaCapture,
+    Media,
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }    

@@ -7,9 +7,11 @@ import { IonicModule } from '@ionic/angular';
 import { AddPostagemPageRoutingModule } from './add-postagem-routing.module';
 
 import { AddPostagemPage } from './add-postagem.page';
+import { CompartilhadoModule } from 'src/app/compartilhado/compartilhado.module';
 
 @NgModule({
   imports: [
+    CompartilhadoModule,
     CommonModule,
     FormsModule,
     IonicModule,

@@ -24,3 +24,250 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+/*shadow css*/
+
+.shadow-1{
+	box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.1);
+}
+.shadow-2{
+	box-shadow: 0px 5px 10px 0px rgba(0,0,0,0.1);
+}
+.shadow-3{
+	box-shadow: 0px 10px 25px 0px rgba(0,0,0,0.1);
+}
+.shadow-4{
+	box-shadow: 0px 15px 50px 0px rgba(0,0,0,0.3);
+}
+.shadow-5{
+	box-shadow: 0px 20px 70px 0px rgba(0,0,0,0.5);
+}
+
+/*background color*/
+.bg-white{
+	background: #fff;
+}
+.bg-white-2{
+	background: #f1f1f1;
+}
+.bg-white-3{
+	background: #e9e9e9;
+}
+
+.bg-black{
+	background: #111;
+}
+.bg-black-2{
+	background: #222;
+}
+.bg-black-3{
+	background: #333;
+}
+
+.bg-base{
+	background: var(--ion-color-base);
+}
+.bg-secondary{
+	background: var(--ion-color-secondary);
+}
+.bg-tertiary{
+	background: var(--ion-color-tertiary);
+}
+.bg-light{
+	background: var(--ion-color-light);
+}
+.bg-medium{
+	background: var(--ion-color-medium);
+}
+.bg-dark{
+	background: var(--ion-color-dark);
+}
+.bg-success{
+	background: var(--ion-color-success);
+}
+.bg-warning{
+	background: var(--ion-color-warning);
+}
+.bg-danger{
+	background: var(--ion-color-danger);
+}
+
+/*margin css*/
+
+.mg-0{
+	margin: 0px !important;
+}
+.mg-auto{
+	margin-left: auto !important;
+	margin-right: auto !important;
+}
+
+
+
+
+
+
+.mg-5{
+	margin: 5px !important;
+}
+.mg-10{
+	margin: 10px !important;
+}
+.mg-15{
+	margin: 15px !important;
+}
+.mg-20{
+	margin: 20px !important;
+}
+.mg-25{
+	margin: 25px !important;
+}
+.mg-30{
+	margin: 30px !important;
+}
+.mg-35{
+	margin: 35px !important;
+}
+.mg-40{
+	margin: 40px !important;
+}
+.mg-45{
+	margin: 45px !important;
+}
+.mg-50{
+	margin: 50px !important;
+}
+.mg-70{
+	margin: 70px !important;
+}
+.mg-90{
+	margin: 90px !important;
+}
+
+
+
+
+
+
+.mgt-0{
+	margin-top: 0px !important;
+}
+.mgt-5{
+	margin-top: 5px !important;
+}
+.mgt-10{
+	margin-top: 10px !important;
+}
+.mgt-15{
+	margin-top: 15px !important;
+}
+.mgt-20{
+	margin-top: 20px !important;
+}
+.mgt-25{
+	margin-top: 25px !important;
+}
+.mgt-30{
+	margin-top: 30px !important;
+}
+.mgt-35{
+	margin-top: 35px !important;
+}
+.mgt-40{
+	margin-top: 40px !important;
+}
+.mgt-45{
+	margin-top: 45px !important;
+}
+.mgt-50{
+	margin-top: 50px !important;
+}
+.mgt-70{
+	margin-top: 70px !important;
+}
+.mgt-90{
+	margin-top: 90px !important;
+}
+
+/*roound css*/
+
+.bdra-0{
+	border-radius: 0px;
+	overflow: hidden;
+}
+.bdra-1{
+	border-radius: 1px;
+	overflow: hidden;
+}
+.bdra-2{
+	border-radius: 2px;
+	overflow: hidden;
+}
+.bdra-3{
+	border-radius: 3px;
+	overflow: hidden;
+}
+.bdra-4{
+	border-radius: 4px;
+	overflow: hidden;
+}
+.bdra-5{
+	border-radius: 5px;
+	overflow: hidden;
+}
+.bdra-6{
+	border-radius: 6px;
+	overflow: hidden;
+}
+.bdra-7{
+	border-radius: 7px;
+	overflow: hidden;
+}
+.bdra-8{
+	border-radius: 8px;
+	overflow: hidden;
+}
+.bdra-9{
+	border-radius: 9px;
+	overflow: hidden;
+}
+.bdra-10{
+	border-radius: 10px;
+	overflow: hidden;
+}
+.bdra-12{
+	border-radius: 12px;
+	overflow: hidden;
+}
+.bdra-14{
+	border-radius: 14px;
+	overflow: hidden;
+}
+.bdra-15{
+	border-radius: 15px;
+	overflow: hidden;
+}
+.bdra-16{
+	border-radius: 16px;
+	overflow: hidden;
+}
+.bdra-18{
+	border-radius: 18px;
+	overflow: hidden;
+}
+.bdra-20{
+	border-radius: 20px;
+	overflow: hidden;
+}
+.bdra-25{
+	border-radius: 25px;
+	overflow: hidden;
+}
+.bdra-30{
+	border-radius: 30px;
+	overflow: hidden;
+}
+.circle{
+	border-radius: 50%;
+	overflow: hidden;
+}

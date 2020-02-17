@@ -12,7 +12,9 @@ const routes: Routes = [
     path: 'inicio',
     loadChildren: './timeline/timeline.module#TimelineModule',
     canLoad: [AuthGuard]
-  }
+  },
+  
+
 ];
 
 @NgModule({

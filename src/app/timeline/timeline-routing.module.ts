@@ -25,7 +25,19 @@ const routes: Routes = [
       }
 
     ]
-  }  
+  },   {
+    path: 'texto',
+    loadChildren: () => import('./paginas/texto/texto.module').then( m => m.TextoPageModule)
+  },
+  {
+    path: 'video',
+    loadChildren: () => import('./paginas/video/video.module').then( m => m.VideoPageModule)
+  },
+  {
+    path: 'podcast',
+    loadChildren: () => import('./paginas/podcast/podcast.module').then( m => m.PodcastPageModule)
+  }
+ 
 ];
 
 
