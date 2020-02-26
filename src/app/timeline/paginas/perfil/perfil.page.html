@@ -1,16 +1,13 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>
-      Perfil
-    </ion-title>
+<!-- <ion-header>
+  
     <app-botao-logout slot="end">
     </app-botao-logout>
-  </ion-toolbar>
-</ion-header>
+  
+</ion-header> -->
 
 <ion-content class="ion-padding">
-
-  <div class="foto-perfil">
+  <div *ngIf="user">
+  <!-- <div class="foto-perfil">
     <div *ngIf="user" >
       <img [src]="user.photoURL" />      
       <h3>Bem-vindo, {{ user.displayName }}</h3>
@@ -21,5 +18,98 @@
       Trocar Foto
     </ion-button>
   </div>
+ -->
+
+ <div class="wrap-cover parallax-obj">
+  <div class="bg-profile shadow-4">
+    <img class="parallax-obj parallax-up-obj parallax-blur-obj" src="assets/img/lemon16.jpg">
+  </div>
+</div>
+<div class="wrap-avatar" >
+  <div class="action-btn">
+    <ion-button shape="round" fill="clear" class="e2eShowPopover" >
+      <ion-icon name="more"></ion-icon>
+    </ion-button>
+  </div>
+  <div class="avt-image circle" (click)="abrirGaleria()">
+    <img [src]="user.photoURL" /> 
+  </div>
+  <div class="action-btn">
+    <app-botao-logout shape="round" fill="clear" class="">
+      <ion-icon name="log-out"></ion-icon>
+    </app-botao-logout>
+
+    <!-- <ion-button shape="round" fill="clear" class="" >
+      <ion-icon name="log-out"></ion-icon>
+    </ion-button> -->
+  </div>
+</div>
+
+
+
+
+
+
+<div class="ion-padding">
+
+  <div class="info ion-text-center">
+    <h2 class="fw-600 fs-26 ion-no-margin" >{{ user.displayName }}</h2>
+    <p class="txt4 ion-no-margin" >Designer / Development</p>
+  </div>
+
+  <div class="pdt-20">
+    <ion-row>
+      <ion-col class="ion-text-center">
+        <h5  class="fs-14 txt4 fw-400 ion-no-margin">Liked</h5>
+        <p  class="txt3 fs-18 fw-600 ion-no-margin">2,5K</p>
+      </ion-col>
+      <ion-col class="ion-text-center">
+        <h5  class="fs-14 txt4 fw-400 ion-no-margin">Posted</h5>
+        <p  class="txt3 fs-18 fw-600 ion-no-margin">87</p>
+      </ion-col>
+      <ion-col class="ion-text-center">
+        <h5  class="fs-14 txt4 fw-400 ion-no-margin">Follower</h5>
+        <p  class="txt3 fs-18 fw-600 ion-no-margin">200</p>
+      </ion-col>
+    </ion-row>
+    <p  class="txt4 pd-20 pdt-10 ion-text-center">The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc</p>
+  </div>
+
+  <div class="pdt-15">
+    <div class="st-name">
+      <h2  class="uppercase fs-12 ion-no-margin">Postagens</h2>
+      <ion-button class="fs-16 txt4" size="small" fill="clear">
+        <ion-icon slot="icon-only" name="ios-arrow-round-forward"></ion-icon>
+      </ion-button>
+    </div>
+    <div class="wrap-gallery-info pd-10">
+    <div class="element-gallery pd-5" *ngFor="let postagem of postagens">
+        <div (click)="viewImg('lemon2.png')" class="wrap-element shadow-2">
+          <div class="thumb-view" >
+              <img [src]="postagem.Capa">
+          </div>
+          <div class="pd-10 txt-info txt-light">
+            <h4  class="ellipsis fs-12 fw-600 spacing1 pdb-2 uppercase ion-no-margin">Lorem Ipsum is simply dummy text</h4>
+            <p  class="ellipsis fs-12 ion-no-margin">Contrary to popular belief, Lorem Ipsum is not simply random text</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="wrapper-masonry wrap-posted" *ngFor="let postagem of postagens">
+      <ion-row>
+        <ion-col>
+          <div class="element-gallery pdt-2">
+            <img [src]="postagem.Capa">
+          </div>
+          
+        </ion-col>
+        
+      </ion-row>
+    </div>
+  </div>
+
+</div>
+</div>
 
 </ion-content>

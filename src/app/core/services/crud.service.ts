@@ -1,12 +1,17 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { AuthService } from './auth.service';
+
+import * as firebase from 'firebase/app';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CrudService {
+  user: firebase.User;
+  
 
-  constructor(private firestore: AngularFirestore) { }
+  constructor(private firestore: AngularFirestore, private auth: AuthService) { }
 
   /* CRUD POSTAGENS */
   create_NovaPostagem(record) {
@@ -15,6 +20,10 @@ export class CrudService {
  
   read_Postagens() {
     return this.firestore.collection('Postagens').snapshotChanges();
+  }
+
+  read_PostagensUsuario(userID) {
+    return this.firestore.collection('Postagens', ref => ref.where('Usuario','==', userID)).snapshotChanges();
   }
  
   update_Postagem(recordID,record){

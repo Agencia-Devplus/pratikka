@@ -10,6 +10,7 @@ import { finalize } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { PerfilService } from '../../services/perfil.service';
 import { Crop } from '@ionic-native/crop/ngx';
+import { CrudService } from 'src/app/core/services/crud.service';
 
 @Component({
   selector: 'app-perfil',
@@ -22,6 +23,8 @@ export class PerfilPage implements OnInit {
   urlCroppedIMG: string;
   urlIMG: string;
 
+  postagens: any;
+
   constructor(
     private auth: AuthService,
     private camera: Camera,
@@ -29,12 +32,32 @@ export class PerfilPage implements OnInit {
     private file: File,
     private storage: AngularFireStorage,
     private overlay: OverlayService,
-    private crop: Crop
+    private crop: Crop,
+    private crudService: CrudService
   ) {
     this.auth.authState$.subscribe(user => (this.user = user));
   }
 
   ngOnInit() {
+    this.lerPostagensUsuario();
+  }
+
+  lerPostagensUsuario(){
+    this.crudService.read_PostagensUsuario(firebase.auth().currentUser.displayName).subscribe(data => {
+ 
+      this.postagens = data.map(e => {
+        return {
+          id: e.payload.doc.id,
+          isEdit: false,
+          Titulo: e.payload.doc.data()['Titulo'],
+          Texto: e.payload.doc.data()['Texto'],
+          Capa: e.payload.doc.data()['Capa'],
+          Usuario: e.payload.doc.data()['Usuario']
+        };
+      })
+      console.log(this.postagens);
+ 
+    });
   }
 
   // Testes upload de imagens

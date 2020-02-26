@@ -11,9 +11,13 @@
   <ion-card *ngFor="let item of postagens">
     <span *ngIf="!item.isEdit; else elseBlock">
       <ion-card-header>
-        <ion-card-title>Titulo: {{item.Titulo}}</ion-card-title>
-        <ion-card-subtitle>Capa: {{item.Capa}}</ion-card-subtitle>
-        Texto: {{item.Texto}}
+        <img [src]="item.Capa" />
+        <ion-card-title>{{item.Titulo}}</ion-card-title>
+        <div class="ion-text-justify">
+          <p>
+            {{item.Texto}}
+          </p>
+        </div>
       </ion-card-header>
       <ion-card-content>
 
