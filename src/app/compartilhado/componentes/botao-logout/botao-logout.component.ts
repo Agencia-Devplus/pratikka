@@ -6,11 +6,11 @@ import { OverlayService } from 'src/app/core/services/overlay.service';
 @Component({
   selector: 'app-botao-logout',
   template: `
-    <ion-buttons>
-      <ion-button (click)="logout()">
+
+      <ion-button shape="round" fill="clear" class="e2eShowPopover" (click)="logout()">
         <ion-icon name="exit" slot="icon-only"></ion-icon>
       </ion-button>
-    </ion-buttons>
+
   `
 })
 export class BotaoLogoutComponent implements OnInit {
@@ -30,7 +30,7 @@ export class BotaoLogoutComponent implements OnInit {
           text: 'Sim',
           handler: async () => {
             await this.auth.logout();
-            //await this.menuCtrl.enable(false, this.menu);
+            // await this.menuCtrl.enable(false, this.menu);
             this.nav.navigateRoot('/login');
           }
         },
