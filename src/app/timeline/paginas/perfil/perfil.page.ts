@@ -8,7 +8,6 @@ import { OverlayService } from 'src/app/core/services/overlay.service';
 import * as firebase from 'firebase';
 import { finalize } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { PerfilService } from '../../services/perfil.service';
 import { Crop } from '@ionic-native/crop/ngx';
 import { CrudService } from 'src/app/core/services/crud.service';
 
@@ -42,9 +41,9 @@ export class PerfilPage implements OnInit {
     this.lerPostagensUsuario();
   }
 
-  lerPostagensUsuario(){
+  lerPostagensUsuario() {
     this.crudService.read_PostagensUsuario(firebase.auth().currentUser.displayName).subscribe(data => {
- 
+
       this.postagens = data.map(e => {
         return {
           id: e.payload.doc.id,
@@ -56,7 +55,7 @@ export class PerfilPage implements OnInit {
         };
       })
       console.log(this.postagens);
- 
+
     });
   }
 
@@ -66,7 +65,9 @@ export class PerfilPage implements OnInit {
       quality: 80,
       destinationType: this.camera.DestinationType.FILE_URI,
       sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
-      correctOrientation: true
+      correctOrientation: true,
+      targetHeight: 600,
+      targetWidth: 600
     }
     const loading = await this.overlay.loading();
     try {
@@ -105,7 +106,7 @@ export class PerfilPage implements OnInit {
   }
 
   cropImage(fileUrl) {
-    this.crop.crop(fileUrl, { quality: 50 })
+    this.crop.crop(fileUrl, { quality: 50, targetWidth: 300, targetHeight: 300 })
       .then(
         async newPath => {
           let file: string;
@@ -114,7 +115,7 @@ export class PerfilPage implements OnInit {
             file = newPath.split('/').pop();
           } else {
             file = newPath.substring(newPath.lastIndexOf('/') + 1, newPath.indexOf('?'));
-            this.crop.crop(file, { quality: 70 }).then((caminho) => {
+            this.crop.crop(file, { quality: 70, targetWidth: 300, targetHeight: 300 }).then((caminho) => {
               this.urlCroppedIMG = caminho;
             })
           }
@@ -127,7 +128,7 @@ export class PerfilPage implements OnInit {
         },
         error => {
           this.overlay.toast({
-            message: 'Erro cortando a img: ' + error
+            message: 'Erro cortando a imagem: ' + error
           })
         }
       );

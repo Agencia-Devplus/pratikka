@@ -1,17 +1,10 @@
-<!-- <ion-header>
-
-    <app-botao-logout slot="end">
-    </app-botao-logout>
-
-</ion-header> -->
-
 <ion-content>
     <!-- Inicio If User -->
     <div *ngIf="user">
         <!-- Capa -->
         <div class="wrap-cover parallax-obj">
             <div class="bg-profile shadow-4">
-                <img class="parallax-obj parallax-up-obj parallax-blur-obj" src="assets/img/lemon16.jpg">
+                <img class="parallax-obj parallax-up-obj parallax-blur-obj" src="assets/img/texto.jpg">
             </div>
         </div>
         <!-- Fim Capa -->
@@ -21,7 +14,7 @@
             <!-- Botão Mais-->
             <div class="action-btn">
                 <ion-button shape="round" fill="clear" class="e2eShowPopover">
-                    <ion-icon name="more"></ion-icon>
+                    <ion-icon name="apps-outline"></ion-icon>
                 </ion-button>
             </div>
             <!-- Fim Botão Mais-->
@@ -72,8 +65,8 @@
 
             <!-- Cartão Postagem -->
             <div class="wrap-gallery-info">
-                <div class=" element-gallery" *ngFor="let postagem of postagens ">
-                    <div class="wrap-element shadow-2 pdr-10 pdl-10">
+                <div class=" element-gallery pdl-5 pdr-5" *ngFor="let postagem of postagens ">
+                    <div class="wrap-element shadow-2">
                         <div class="thumb-view">
                             <img [src]="postagem.Capa ">
                         </div>

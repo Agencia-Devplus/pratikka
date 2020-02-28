@@ -1,55 +1,54 @@
 <ion-header>
-  <ion-item slot="end">
-    <ion-icon name="arrow-forward" slot="end"></ion-icon>
-  </ion-item>
+    <ion-item slot="end">
+        <ion-icon name="arrow-forward" slot="end"></ion-icon>
+    </ion-item>
 </ion-header>
 
 <ion-content>
-  <ion-slides>
+    <ion-slides>
 
-    <ion-slide>
-      <div class="slide">
-        <img src="assets/img/texto.jpg" />
-        <ion-item lines="none" class="bdra-30 shadow-2 bg-light">
-          <ion-input type="text" placeholder="Digite seu título" [(ngModel)]="postagemTitulo" name="titulo"></ion-input>
-        </ion-item>
-        <h2>Título</h2>
-        <p>Escolha um bom título<b> relacionado a sua publicação,</b> lembrece que o título chama a atenção do leitor.
-        </p>
-      </div>
-    </ion-slide>
+        <ion-slide>
+            <div class="slide">
+                <img src="assets/img/texto.jpg" />
+                <ion-item lines="none" class="bdra-30 shadow-2 bg-light">
+                    <ion-input type="text" placeholder="Digite seu título" [(ngModel)]="postagemTitulo" name="titulo"></ion-input>
+                </ion-item>
+                <h2>Título</h2>
+                <p>Escolha um bom título<b> relacionado a sua publicação,</b> lembrece que o título chama a atenção do leitor.
+                </p>
+            </div>
+        </ion-slide>
 
-    <ion-slide>
-      <div class="slide">
-        <img src="assets/img/texto.jpg" />
-        <ion-item lines="none" class="bdra-30 shadow-2 bg-light mgt-5">
-          <ion-input type="text" placeholder="Digite seu texto" [(ngModel)]="postagemTexto" name="texto"></ion-input>
-        </ion-item>
-        <h2>Texto</h2>
-        <p>Agora repasse<b> seu conhecimento</b> adiante da melhor forma possível.</p>
-      </div>
-    </ion-slide>
+        <ion-slide>
+            <div class="slide">
+                <img src="assets/img/texto.jpg" />
+                <ion-item lines="none" class="bdra-30 shadow-2 bg-light mgt-5">
+                    <ion-input type="text" placeholder="Digite seu texto" [(ngModel)]="postagemTexto" name="texto"></ion-input>
+                </ion-item>
+                <h2>Texto</h2>
+                <p>Agora repasse<b> seu conhecimento</b> adiante da melhor forma possível.</p>
+            </div>
+        </ion-slide>
 
-    <ion-slide>
-      <ion-button (click)="abrirGaleria(0)" expand="block"> Escolha a capa</ion-button>
-      <ion-item>
-        <ion-label>progress do upload: {{uploadPercent | async}}%</ion-label>
-      </ion-item>
-      <ion-item lines="none" class="bdra-30 shadow-2 bg-light mgt-5">
-        <ion-input type="text" [(ngModel)]="postagemCapa" name="capa" value="{{ downloadURL | async}}"></ion-input>
-      </ion-item>
+        <ion-slide>
+            <ion-button (click)="abrirGaleria()" expand="block"> Escolha a capa</ion-button>
+            <ion-item>
+                <ion-label>progress do upload: {{uploadPercent | async}}%</ion-label>
+            </ion-item>
+            <ion-item lines="none" class="bdra-30 shadow-2 bg-light mgt-5">
+                <ion-input type="text" [(ngModel)]="postagemCapa" name="capa" value="{{ downloadURL | async}}"></ion-input>
+            </ion-item>
 
-      <h2>Capa da Publicação</h2>
-      <p>Seleciona uma capa para sua publicação, você também placeholder
-        utilizar aplicativos como <b> Canva, PicMoney, Visme</b> dentre outros.</p>
+            <h2>Capa da Publicação</h2>
+            <p>Seleciona uma capa para sua publicação, você também placeholder utilizar aplicativos como <b> Canva, PicMoney, Visme</b> dentre outros.</p>
 
-      <ion-button (click)="criarPostagem()" [disabled]="!postagemTitulo || !postagemTexto || !postagemCapa">
-        Publicar
-      </ion-button>
-    </ion-slide>
+            <ion-button (click)="criarPostagem()" [disabled]="!postagemTitulo || !postagemTexto || !postagemCapa">
+                Publicar
+            </ion-button>
+        </ion-slide>
 
-  </ion-slides>
-  <!-- <ion-grid fixed>
+    </ion-slides>
+    <!-- <ion-grid fixed>
     <ion-row>
       <ion-item>
         <ion-input placeholder="Enter Titulo" [(ngModel)]="postagemTitulo"></ion-input>

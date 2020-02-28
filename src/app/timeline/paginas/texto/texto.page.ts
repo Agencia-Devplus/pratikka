@@ -46,7 +46,7 @@ export class TextoPage implements OnInit {
     private file: File,
     private storage: AngularFireStorage,
     private crop: Crop,
-    public router:Router) {
+    public router: Router) {
     this.auth.authState$.subscribe(user => (this.user = user));
   }
 
@@ -58,39 +58,56 @@ export class TextoPage implements OnInit {
   }
 
   /* galeria */
-  async abrirGaleria(srcType: number) {
+  async abrirGaleria() {
     const options: CameraOptions = {
-      quality: 100,
-      destinationType: this.useURI ? this.camera.DestinationType.FILE_URI : this.camera.DestinationType.DATA_URL,
-      encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE,
-      sourceType: srcType,
-      targetWidth: 500,
-      targetHeight: 500,
-      saveToPhotoAlbum: true,
-      correctOrientation: true
+      quality: 80,
+      destinationType: this.camera.DestinationType.FILE_URI,
+      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+      correctOrientation: true,
+      targetHeight: 1080,
+      targetWidth: 1080
     };
+    const loading = await this.overlay.loading();
     try {
-      const fileUri: string = await this.camera.getPicture(options);
-      let file: string;
-
-      if (this.platform.is('ios')) {
-        file = fileUri.split('/').pop();
-      } else {
-        file = fileUri.substring(fileUri.lastIndexOf('/') + 1, fileUri.indexOf('?'));
-      }
-      //path armazena o caminho do arquivo
-      const path: string = fileUri.substring(0, fileUri.lastIndexOf('/'));
-      //passando imagem como arquivo binário
-      const buffer: ArrayBuffer = await this.file.readAsArrayBuffer(path, file);
-      //conversão do arquivo binário da imagem em imagem
-      const blob: Blob = new Blob([buffer], { type: 'image/jpeg' });
-      //
-      this.uploadPic(blob);
-
+      await this.camera.getPicture(options).then((imageData) => {
+        this.cropImage(imageData);
+      })
     } catch (error) {
-      console.error(error);
+      this.overlay.toast({
+        message: 'Erro: ' + error
+      })
+    } finally {
+      loading.dismiss();
     }
+  }
+
+  cropImage(fileUrl) {
+    this.crop.crop(fileUrl, { quality: 70 })
+      .then(
+        async newPath => {
+          let file: string;
+
+          if (this.platform.is('ios')) {
+            file = newPath.split('/').pop();
+          } else {
+            file = newPath.substring(newPath.lastIndexOf('/') + 1, newPath.indexOf('?'));
+            this.crop.crop(file, { quality: 70 }).then((caminho) => {
+              this.urlCroppedIMG = caminho;
+            })
+          }
+
+          const path: string = newPath.substring(0, newPath.lastIndexOf('/'));
+          const buffer: ArrayBuffer = await this.file.readAsArrayBuffer(path, file);
+          const blob: Blob = new Blob([buffer], { type: 'image/jpeg' });
+
+          this.uploadPic(blob);
+        },
+        error => {
+          this.overlay.toast({
+            message: 'Erro cortando a imagem: ' + error
+          })
+        }
+      );
   }
 
   uploadPic(blob: Blob) {
