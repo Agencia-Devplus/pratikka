@@ -11,22 +11,10 @@
   </ion-item>
 
   <ion-slides [options]="slidesOptions">
-    <ion-slide>
-      <ion-card [style.backgroundImage]="'url(./assets/img/shingeki-no-kyojin.jpg)'" class="poster1_card">
+    <ion-slide *ngFor="let postagem of postagens">
+      <ion-card class="poster1_card" [routerLink]="['/inicio/detalhes/' + postagem.id]" routerdirection="forward">
+        <img [src]="postagem.Capa">
       </ion-card>
-    </ion-slide>
-
-    <ion-slide>
-      <ion-card [style.backgroundImage]="'url(./assets/img/nanatsu-no-taizai.jpg)'" class="poster1_card">
-      </ion-card>
-    </ion-slide>
-
-    <ion-slide>
-      <ion-card [style.backgroundImage]="'url(./assets/img/lucifer.jpg)'" class="poster1_card"></ion-card>
-    </ion-slide>
-
-    <ion-slide>
-      <ion-card [style.backgroundImage]="'url(./assets/img/narcos.jpg)'" class="poster1_card"></ion-card>
     </ion-slide>
   </ion-slides>
 

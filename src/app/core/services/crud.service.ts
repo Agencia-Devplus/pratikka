@@ -33,5 +33,9 @@ export class CrudService {
   delete_Postagem(record_id) {
     this.firestore.doc('Postagens/' + record_id).delete();
   }
+  
+  detail_Postagem(recordID) {
+    return this.firestore.collection('Postagens').doc(recordID).get();
+    }
   /* FIM CRUD POSTAGENS */
 }

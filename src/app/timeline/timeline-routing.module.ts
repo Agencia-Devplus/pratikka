@@ -36,6 +36,10 @@ const routes: Routes = [
   {
     path: 'podcast',
     loadChildren: () => import('./paginas/podcast/podcast.module').then( m => m.PodcastPageModule)
+  },
+  {
+    path: 'detalhes/:id',
+    loadChildren: () => import('./paginas/detalhes/detalhes.module').then( m => m.DetalhesPageModule)
   }
  
 ];
