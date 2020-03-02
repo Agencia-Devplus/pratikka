@@ -5,21 +5,27 @@
     padding-top: 10px;
     width: 100%;
     box-shadow: 1px 1px rgba(160, 160, 160, 0.453);
-  }
-  
-  .logo {
+}
+
+.logo {
     height: 44px;
-  }
-  
-  .poster1_card {
-    width: 140px;
-    height: 180px;
-    background-size: cover;
-  }
-  .card2 {
+}
+
+.poster1_card {
+    width: 300px;
+    height: 300px;
+    img {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        height: 150px;
+        width: 150px;
+    }
+}
+
+.card2 {
     width: 180px;
     height: 80px;
-    background: linear-gradient(#cc3300,#ff6666),
-    url('/assets/img/shingeki-no-kyojin.jpg');
+    background: linear-gradient(#cc3300, #ff6666), url('/assets/img/shingeki-no-kyojin.jpg');
     background-size: cover;
-  }
+}

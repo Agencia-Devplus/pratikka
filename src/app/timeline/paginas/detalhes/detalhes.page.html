@@ -1,24 +1,25 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>detalhes</ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="/inicio/painel/timeline"></ion-back-button>
+        </ion-buttons>
+        <ion-title>Artigo</ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  
-  <div *ngFor="let post of postagem ">
 
-  <ion-card >
-    <img [src]="post.Capa">
-     <ion-card-content>
-      <ion-card-title>
-        {{ post.Titulo}}
-        </ion-card-title>
-      <p>
-        {{ post.Texto }}
-      </p>
-    </ion-card-content> 
-  </ion-card>
-</div>
-
+    <div *ngFor="let post of postagem ">
+        <ion-card>
+            <img [src]="post.Capa">
+            <ion-card-content>
+                <ion-card-title>
+                    {{ post.Titulo}}
+                </ion-card-title>
+                <p>
+                    {{ post.Texto }}
+                </p>
+            </ion-card-content>
+        </ion-card>
+    </div>
 </ion-content>

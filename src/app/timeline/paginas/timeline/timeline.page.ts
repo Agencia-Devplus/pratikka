@@ -9,7 +9,8 @@ import { CrudService } from 'src/app/core/services/crud.service';
 export class TimelinePage implements OnInit {
 
   slidesOptions = {
-    slidesPerView: 3
+    spaceBetween: 0,
+    slidesPerView: 1.50,
   };
 
   postagens: any;
@@ -17,7 +18,9 @@ export class TimelinePage implements OnInit {
   constructor(private crudService: CrudService) { }
 
   ngOnInit() {
-    this.lerPostagens();
+    setTimeout(() => {
+      this.lerPostagens();
+    }, 1000)
   }
 
   lerPostagens() {
@@ -30,11 +33,9 @@ export class TimelinePage implements OnInit {
           Titulo: e.payload.doc.data()['Titulo'],
           Texto: e.payload.doc.data()['Texto'],
           Capa: e.payload.doc.data()['Capa'],
+          Usuario: e.payload.doc.data()['Usuario'],
         };
       })
-      console.log(this.postagens);
-
     });
   }
-
 }

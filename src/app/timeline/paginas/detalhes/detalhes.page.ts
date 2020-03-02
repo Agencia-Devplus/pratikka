@@ -8,18 +8,15 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
   styleUrls: ['./detalhes.page.scss'],
 })
 export class DetalhesPage implements OnInit {
-  
-  idpostagem:string
+
+  idpostagem: string
   postagem: any;
 
-  constructor(private crudService: CrudService, public route:ActivatedRoute) {
-
-    this.route.paramMap.subscribe( (params:ParamMap) =>
-      {
-        this.idpostagem=params.get('id')
-
-      })
-   }
+  constructor(private crudService: CrudService, public route: ActivatedRoute) {
+    this.route.paramMap.subscribe((params: ParamMap) => {
+      this.idpostagem = params.get('id')
+    })
+  }
 
   ngOnInit() {
     this.getPostagem(this.idpostagem);
@@ -27,14 +24,10 @@ export class DetalhesPage implements OnInit {
 
   getPostagem(recordRow) {
     this.crudService.detail_Postagem(this.idpostagem).subscribe(data => {
-
       this.postagem = data.data();
       //convertendo objeto em array
       this.postagem = Array.of(this.postagem);
-      
-      
       console.log(this.postagem);
     })
   }
-
 }
