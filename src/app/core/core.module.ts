@@ -15,6 +15,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { MediaCapture } from '@ionic-native/media-capture/ngx';
 import { Media } from '@ionic-native/media/ngx';
 import { IonicStorageModule } from '@ionic/storage/';
+import { DetalhesPopoverPageModule } from '../timeline/paginas/detalhes-popover/detalhes-popover.module';
 
 
 
@@ -30,7 +31,8 @@ import { IonicStorageModule } from '@ionic/storage/';
     AngularFirestoreModule.enablePersistence({
       synchronizeTabs: true
     }),
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
+    DetalhesPopoverPageModule
   ],
   exports: [
     BrowserModule,
