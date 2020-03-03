@@ -4,6 +4,11 @@
             <ion-back-button defaultHref="/inicio/painel/timeline"></ion-back-button>
         </ion-buttons>
         <ion-title>Artigo</ion-title>
+        <ion-buttons slot="end">
+            <ion-button fill="clear">
+                <ion-icon name="ellipsis-vertical"></ion-icon>
+            </ion-button>
+        </ion-buttons>
     </ion-toolbar>
 </ion-header>
 
@@ -12,13 +17,11 @@
     <div *ngFor="let post of postagem ">
         <ion-card>
             <img [src]="post.Capa">
+            <ion-card-header>
+                <ion-card-title>{{ post.Titulo }}</ion-card-title>
+            </ion-card-header>
             <ion-card-content>
-                <ion-card-title>
-                    {{ post.Titulo}}
-                </ion-card-title>
-                <p>
-                    {{ post.Texto }}
-                </p>
+                {{ post.Texto }}
             </ion-card-content>
         </ion-card>
     </div>

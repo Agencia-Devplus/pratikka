@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CrudService } from 'src/app/core/services/crud.service';
 import { ActivatedRoute, ParamMap } from '@angular/router';
+import * as firebase from 'firebase';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-detalhes',
@@ -8,11 +10,12 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
   styleUrls: ['./detalhes.page.scss'],
 })
 export class DetalhesPage implements OnInit {
-
+  user: firebase.User;
   idpostagem: string
   postagem: any;
 
-  constructor(private crudService: CrudService, public route: ActivatedRoute) {
+  constructor(private crudService: CrudService, public route: ActivatedRoute, private auth: AuthService) {
+    this.auth.authState$.subscribe(user => (this.user = user));
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.idpostagem = params.get('id')
     })

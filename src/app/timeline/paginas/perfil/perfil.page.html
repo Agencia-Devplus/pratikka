@@ -63,10 +63,10 @@
             </div>
             <!-- Fim BIO Usuário -->
 
-            <!-- Cartão Postagem -->
+            <!-- Postagens -->
             <div class="wrap-gallery-info">
                 <div class=" element-gallery pdl-5 pdr-5" *ngFor="let postagem of postagens ">
-                    <div class="wrap-element shadow-2">
+                    <div class="wrap-element shadow-2" [routerLink]="['/inicio/detalhes/' + postagem.id]" routerdirection="forward">
                         <div class="thumb-view">
                             <img [src]="postagem.Capa ">
                         </div>
@@ -77,7 +77,7 @@
                     </div>
                 </div>
             </div>
-            <!-- Fim Cartão Postagem -->
+            <!-- Fim Postagens -->
         </div>
         <!-- Fim Informações-->
     </div>

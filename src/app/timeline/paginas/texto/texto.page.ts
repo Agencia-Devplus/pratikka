@@ -147,6 +147,7 @@ export class TextoPage implements OnInit {
     record['Texto'] = this.postagemTexto;
     record['Capa'] = this.postagemCapa;
     record['Usuario'] = this.user.displayName;
+    record['id'] = this.user.uid;
     this.crudService.create_NovaPostagem(record).then(resp => {
       this.postagemTitulo = "";
       this.postagemTexto = "";
