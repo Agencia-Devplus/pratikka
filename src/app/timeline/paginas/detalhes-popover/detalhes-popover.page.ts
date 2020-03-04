@@ -28,22 +28,6 @@ export class DetalhesPopoverPage implements OnInit {
     this.id_user_post = this.navParams.get('id_user_post');
   }
 
-  async removerPostagem() {
-    await this.overlay.alert({
-      message: 'Tem certeza?',
-      buttons: [{
-        text: 'Sim',
-        handler: async () => {
-          this.crudService.delete_Postagem(this.postagem_id);
-          this.popoverController.dismiss();
-          this.navCtrl.pop();
-        }
-      },
-        'Não'
-      ]
-    })
-  }
-
   fecharPopover() {
     this.popoverController.dismiss();
   }

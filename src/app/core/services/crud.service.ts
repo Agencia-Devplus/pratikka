@@ -9,7 +9,7 @@ import * as firebase from 'firebase/app';
 })
 export class CrudService {
   user: firebase.User;
-  
+
 
   constructor(private firestore: AngularFirestore, private auth: AuthService) { }
 
@@ -17,7 +17,7 @@ export class CrudService {
   create_NovaPostagem(record) {
     return this.firestore.collection('Postagens').add(record);
   }
- 
+
   read_Postagens() {
     return this.firestore.collection('Postagens').snapshotChanges();
   }
@@ -25,15 +25,15 @@ export class CrudService {
   read_PostagensUsuario(userID) {
     return this.firestore.collection('Postagens', ref => ref.where('Usuario','==', userID)).snapshotChanges();
   }
- 
-  update_Postagem(recordID,record){
+
+  update_Postagem(recordID, record){
     this.firestore.doc('Postagens/' + recordID).update(record);
   }
- 
+
   delete_Postagem(record_id) {
     this.firestore.doc('Postagens/' + record_id).delete();
   }
-  
+
   detail_Postagem(recordID) {
     return this.firestore.collection('Postagens').doc(recordID).get();
     }

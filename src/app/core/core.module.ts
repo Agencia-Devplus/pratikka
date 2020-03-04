@@ -16,6 +16,9 @@ import { MediaCapture } from '@ionic-native/media-capture/ngx';
 import { Media } from '@ionic-native/media/ngx';
 import { IonicStorageModule } from '@ionic/storage/';
 import { DetalhesPopoverPageModule } from '../timeline/paginas/detalhes-popover/detalhes-popover.module';
+import { FormsModule } from '@angular/forms';
+
+
 
 
 
@@ -46,7 +49,7 @@ import { DetalhesPopoverPageModule } from '../timeline/paginas/detalhes-popover/
     Media,
     StatusBar,
     SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }    
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
 })
 export class CoreModule { }

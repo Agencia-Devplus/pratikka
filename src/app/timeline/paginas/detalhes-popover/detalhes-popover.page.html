@@ -1,15 +1,7 @@
 <ion-list>
-  <ion-list-header>Opções</ion-list-header>
-  <ion-item *ngIf="id_user_post == id_user" class="button">
-    <ion-icon color="primary" name="create-outline" slot="start"></ion-icon>
-    Editar
-  </ion-item>
-  <ion-item *ngIf="id_user_post == id_user" class="button" (click)="removerPostagem()">
-    <ion-icon color="danger" name="trash-outline" slot="start"></ion-icon>
-    Remover
-  </ion-item>
-  <ion-item class="button" (click)="fecharPopover()">
-    <ion-icon name="close" slot="start"></ion-icon>
-    Sair
-  </ion-item>
+    <ion-list-header>Opções</ion-list-header>
+    <ion-item class="button" (click)="fecharPopover()">
+        <ion-icon name="close" slot="start"></ion-icon>
+        Sair
+    </ion-item>
 </ion-list>

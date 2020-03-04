@@ -15,8 +15,27 @@
 <ion-content>
 
     <div *ngFor="let post of postagem ">
-        <ion-card>
+        <span *ngIf="!post.isEdit; else elseBlock">
+            <ion-card>
             <img [src]="post.Capa">
+            <!-- Toolbar Postagem-->
+            <ion-toolbar>
+                <ion-buttons slot="start">
+                    <ion-button>
+                        <ion-icon name="happy-outline"></ion-icon>
+                    </ion-button>
+                </ion-buttons>
+                <ion-buttons slot="end" *ngIf="user.uid == id_user_postagem">
+                    <ion-button color="primary" fill="clear" (click)="editarPostagem(post)">
+                        <ion-icon name="create-outline"></ion-icon>
+                    </ion-button>
+                    <ion-button color="danger" fill="clear" (click)="removerPostagem()">
+                        <ion-icon name="trash"></ion-icon>
+                    </ion-button>
+                </ion-buttons>
+            </ion-toolbar>
+            <!-- Fim Toolbar Postagem-->
+
             <ion-card-header>
                 <ion-card-title>{{ post.Titulo }}</ion-card-title>
             </ion-card-header>
@@ -24,5 +43,31 @@
                 {{ post.Texto }}
             </ion-card-content>
         </ion-card>
+        </span>
+
+        <ng-template #elseBlock>
+            <ion-card>
+                <img [src]="post.Capa">
+                <!-- Toolbar Postagem-->
+                <ion-toolbar>
+                    <ion-buttons slot="end">
+                        <ion-button color="danger" fill="clear" (click)="post.isEdit = false">
+                            <ion-icon name="close-outline"></ion-icon>
+                        </ion-button>
+                        <ion-button color="secondary" fill="clear" (click)="salvarEdicao(post)">
+                            <ion-icon name="checkmark-outline"></ion-icon>
+                        </ion-button>
+                    </ion-buttons>
+                </ion-toolbar>
+                <!-- Fim Toolbar Postagem-->
+
+                <ion-card-header>
+                    <ion-input type="text" [(ngModel)]="post.editTitulo"></ion-input>
+                </ion-card-header>
+                <ion-card-content>
+                    <ion-input type="text" [(ngModel)]="post.editTexto"></ion-input>
+                </ion-card-content>
+            </ion-card>
+        </ng-template>
     </div>
 </ion-content>

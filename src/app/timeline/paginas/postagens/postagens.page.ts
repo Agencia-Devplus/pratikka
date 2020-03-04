@@ -16,9 +16,9 @@ export class PostagensPage implements OnInit {
     this.lerPostagens();
   }
 
-  lerPostagens(){
+  lerPostagens() {
     this.crudService.read_Postagens().subscribe(data => {
- 
+
       this.postagens = data.map(e => {
         return {
           id: e.payload.doc.id,
@@ -28,8 +28,6 @@ export class PostagensPage implements OnInit {
           Capa: e.payload.doc.data()['Capa'],
         };
       })
-      console.log(this.postagens);
- 
     });
   }
 
@@ -43,6 +41,7 @@ export class PostagensPage implements OnInit {
     record.editTexto = record.Texto;
     record.editCapa = record.Capa;
   }
+
   UpdateRecord(recordRow) {
     let record = {};
     record['Titulo'] = recordRow.editTitulo;

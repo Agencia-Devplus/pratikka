@@ -3,8 +3,9 @@ import { CrudService } from 'src/app/core/services/crud.service';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import * as firebase from 'firebase';
 import { AuthService } from 'src/app/core/services/auth.service';
-import { PopoverController } from '@ionic/angular';
+import { PopoverController, NavController, LoadingController } from '@ionic/angular';
 import { DetalhesPopoverPage } from '../detalhes-popover/detalhes-popover.page';
+import { OverlayService } from 'src/app/core/services/overlay.service';
 
 @Component({
   selector: 'app-detalhes',
@@ -17,11 +18,12 @@ export class DetalhesPage implements OnInit {
   id_user_postagem: any;
   postagem: any;
 
-
   constructor(private crudService: CrudService,
     public route: ActivatedRoute,
     private auth: AuthService,
-    private popoverController: PopoverController
+    private popoverController: PopoverController,
+    private navCtrl: NavController,
+    private overlay: OverlayService
   ) {
     this.auth.authState$.subscribe(user => (this.user = user));
     this.route.paramMap.subscribe((params: ParamMap) => {
@@ -29,16 +31,68 @@ export class DetalhesPage implements OnInit {
     })
   }
 
-  ngOnInit() {
-    this.getPostagem(this.idpostagem);
+  async ngOnInit() {
+    const loading = await this.overlay.loading();
+    try {
+      this.getPostagem();
+    } catch (e) {
+      this.overlay.toast({
+        message: "Erro ao buscar os dados: " + e.message
+      })
+    } finally {
+      loading.dismiss();
+    }
+
   }
 
-  getPostagem(recordRow) {
+  getPostagem() {
     this.crudService.detail_Postagem(this.idpostagem).subscribe(data => {
       this.postagem = data.data();
       this.id_user_postagem = data.get('id');
       //convertendo objeto em array
-      this.postagem = Array.of(this.postagem);          
+      this.postagem = Array.of(this.postagem);
+    })
+  }
+
+  editarPostagem(postagem) {
+    postagem.isEdit = true;
+    postagem.editTitulo = postagem.Titulo;
+    postagem.editTexto = postagem.Texto;
+    //postagem.editCapa = postagem.Capa;
+  }
+
+  async salvarEdicao(postagem) {
+    const loading = await this.overlay.loading();
+    let record = {};
+    record['Titulo'] = postagem.editTitulo;
+    record['Texto'] = postagem.editTexto;
+    //record['Capa'] = postagem.editCapa;
+    try {
+      this.crudService.update_Postagem(this.idpostagem, record);
+      this.ngOnInit();
+    } catch (e) {
+      this.overlay.toast({
+        message: "Erro: " + e.message
+      })
+    } finally {
+      loading.dismiss();
+    }
+
+    postagem.isEdit = false;
+  }
+
+  async removerPostagem() {
+    await this.overlay.alert({
+      message: 'Deseja realmente apagar essa postagem?',
+      buttons: [{
+        text: 'Sim',
+        handler: async () => {
+          this.crudService.delete_Postagem(this.idpostagem);
+          this.navCtrl.pop();
+        }
+      },
+        'Não'
+      ]
     })
   }
 
