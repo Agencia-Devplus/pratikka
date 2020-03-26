@@ -13,8 +13,7 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: () =>
-              import('../texto/texto.module').then(m => m.TextoPageModule)
+            loadChildren: () => import('../texto/texto.module').then(m => m.TextoPageModule)
           }
         ]
       },
@@ -23,8 +22,7 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: () =>
-              import('../video/video.module').then(m => m.VideoPageModule)
+            loadChildren: () => import('../video/video.module').then(m => m.VideoPageModule)
           }
         ]
       },
@@ -33,22 +31,24 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: () =>
-              import('../podcast/podcast.module').then(m => m.PodcastPageModule)
+            loadChildren: () => import('../podcast/podcast.module').then(m => m.PodcastPageModule)
           }
         ]
-      },
+      }
       /* {
         path: '',
         redirectTo: '/inicio/painel/timeline',
         pathMatch: 'full'
       } */
     ]
+  },
+  {
+    
   }
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule],
+  exports: [RouterModule]
 })
 export class AddPostagemPageRoutingModule {}

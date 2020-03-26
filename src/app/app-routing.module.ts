@@ -13,14 +13,10 @@ const routes: Routes = [
     loadChildren: './timeline/timeline.module#TimelineModule',
     canLoad: [AuthGuard]
   },
-  
-
 ];
 
 @NgModule({
-  imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
-  ],
+  imports: [RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

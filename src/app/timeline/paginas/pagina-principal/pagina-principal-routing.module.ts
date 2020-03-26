@@ -33,8 +33,7 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: () =>
-              import('../perfil/perfil.module').then(m => m.PerfilPageModule)
+            loadChildren: () => import('../perfil/perfil.module').then(m => m.PerfilPageModule)
           }
         ]
       },
@@ -54,6 +53,6 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule],
+  exports: [RouterModule]
 })
-export class PaginaPrincipalPageRoutingModule { }
+export class PaginaPrincipalPageRoutingModule {}

@@ -9,14 +9,18 @@ const MEDIA_FILES_KEY = 'mediaFiles';
 @Component({
   selector: 'app-video',
   templateUrl: './video.page.html',
-  styleUrls: ['./video.page.scss'],
+  styleUrls: ['./video.page.scss']
 })
 export class VideoPage implements OnInit {
   myVideo: any;
   mediaFiles = [];
 
-  constructor(private mediaCapture: MediaCapture, private media: Media,
-    private file: File, private storage: Storage  ) { }
+  constructor(
+    private mediaCapture: MediaCapture,
+    private media: Media,
+    private file: File,
+    private storage: Storage
+  ) {}
 
   ngOnInit() {
     this.captureVideo();
@@ -32,11 +36,11 @@ export class VideoPage implements OnInit {
     let options: CaptureVideoOptions = {
       limit: 1,
       duration: 30
-    }
+    };
     this.mediaCapture.captureVideo(options).then((res: MediaFile[]) => {
       let capturedFile = res[0];
       console.log('my file:', capturedFile);
-      
+
       let fileName = capturedFile.name;
       let dir = capturedFile['localURL'].split('/');
       dir.pop();
@@ -71,10 +75,9 @@ export class VideoPage implements OnInit {
         arr = arr.concat(files);
         this.storage.set(MEDIA_FILES_KEY, JSON.stringify(arr));
       } else {
-        this.storage.set(MEDIA_FILES_KEY, JSON.stringify(files))
+        this.storage.set(MEDIA_FILES_KEY, JSON.stringify(files));
       }
       this.mediaFiles = this.mediaFiles.concat(files);
-    })
+    });
   }
-
 }
