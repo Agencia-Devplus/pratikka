@@ -6,6 +6,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AuthService } from './core/services/auth.service';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
+import { OverlayService } from './core/services/overlay.service';
 
 
 
@@ -16,6 +17,9 @@ import { Router } from '@angular/router';
 })
 export class AppComponent implements OnInit {
   user: firebase.User;
+  lastTimeBackPress = 0;
+  timePeriodToExit = 2000;
+
   constructor(
     private auth: AuthService,
     private angularFireAuth: AngularFireAuth,
@@ -23,7 +27,8 @@ export class AppComponent implements OnInit {
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     private navCtrl: NavController,
-    private router: Router
+    private router: Router,
+    private overlay: OverlayService
   ) {
     this.initializeApp();
   }
@@ -48,11 +53,17 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     if (this.platform.is('android')) {
       this.platform.backButton.subscribeWithPriority(0, () => {
-        console.log('this.router.url', this.router.url);
         if (this.router.url === '/inicio/painel/timeline' ||
           this.router.url === '/inicio/painel/postagens' ||
           this.router.url === '/inicio/painel/perfil') {
-          navigator['app'].exitApp();
+          if (new Date().getTime() - this.lastTimeBackPress < this.timePeriodToExit) {
+            navigator['app'].exitApp(); // work in ionic 4
+          } else {
+            this.overlay.toast({
+              message: "Pressione novamente para sair do aplicativo."
+            })
+            this.lastTimeBackPress = new Date().getTime();
+          }
         } else {
           this.navCtrl.pop();
         }

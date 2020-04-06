@@ -1,19 +1,25 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>
-      Postagens
-    </ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-title>
+            Postagens
+        </ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
-  <ion-card *ngFor="let item of postagens">
-    <span *ngIf="!item.isEdit; else elseBlock">
+    <ion-card *ngFor="let item of postagens">
+        <span *ngIf="!item.isEdit; else elseBlock">
       <ion-card-header>
-        <ion-card-title>Titulo: {{item.Titulo}}</ion-card-title>
-        <ion-card-subtitle>Capa: {{item.Capa}}</ion-card-subtitle>
-        Texto: {{item.Texto}}
+        <div class="img-capa">
+          <img [src]="item.Capa" />
+        </div>
+        <ion-card-title>{{item.Titulo}}</ion-card-title>
+        <div class="ion-text-justify">
+          <p>
+            {{item.Texto}}
+          </p>
+        </div>
       </ion-card-header>
       <ion-card-content>
 
@@ -27,43 +33,43 @@
         </ion-button>
       </ion-card-content>
     </span>
-    <ng-template #elseBlock>
-      <ion-card-header>
-        <ion-card-title>
-          <ion-grid>
-            <ion-row>
-              <ion-col>
-                Edit
-              </ion-col>
-              <ion-col>
-                <ion-button fill="clear" color="medium" size="small" (click)="item.isEdit = false">
-                  Cancel
-                </ion-button>
-              </ion-col>
-              <ion-col>
-                <ion-button fill="outline" color="success" size="small" (click)="UpdateRecord(item)">
-                  Update
-                </ion-button>
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-        </ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        <ion-item>
-          <ion-label><strong>Titulo</strong></ion-label>
-          <ion-input type="text" [(ngModel)]="item.editTitulo"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label><strong>Texto</strong></ion-label>
-          <ion-input type="text" [(ngModel)]="item.editTexto"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label><strong>Capa</strong></ion-label>
-          <ion-input type="text" [(ngModel)]="item.editCapa"></ion-input>
-        </ion-item>
-      </ion-card-content>
-    </ng-template>
-  </ion-card>
+        <ng-template #elseBlock>
+            <ion-card-header>
+                <ion-card-title>
+                    <ion-grid>
+                        <ion-row>
+                            <ion-col>
+                                Edit
+                            </ion-col>
+                            <ion-col>
+                                <ion-button fill="clear" color="medium" size="small" (click)="item.isEdit = false">
+                                    Cancel
+                                </ion-button>
+                            </ion-col>
+                            <ion-col>
+                                <ion-button fill="outline" color="success" size="small" (click)="UpdateRecord(item)">
+                                    Update
+                                </ion-button>
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
+                </ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+                <ion-item>
+                    <ion-label><strong>Titulo</strong></ion-label>
+                    <ion-input type="text" [(ngModel)]="item.editTitulo"></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label><strong>Texto</strong></ion-label>
+                    <ion-input type="text" [(ngModel)]="item.editTexto"></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label><strong>Capa</strong></ion-label>
+                    <ion-input type="text" [(ngModel)]="item.editCapa"></ion-input>
+                </ion-item>
+            </ion-card-content>
+        </ng-template>
+    </ion-card>
 
 </ion-content>
