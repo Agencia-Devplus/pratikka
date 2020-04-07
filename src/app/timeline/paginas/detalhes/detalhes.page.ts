@@ -4,7 +4,6 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 import * as firebase from 'firebase';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { PopoverController, NavController, LoadingController } from '@ionic/angular';
-import { DetalhesPopoverPage } from '../detalhes-popover/detalhes-popover.page';
 import { OverlayService } from 'src/app/core/services/overlay.service';
 
 @Component({
@@ -94,18 +93,5 @@ export class DetalhesPage implements OnInit {
         'Não'
       ]
     })
-  }
-
-  async abrirMenu(ev: Event) {
-    const popover = await this.popoverController.create({
-      component: DetalhesPopoverPage,
-      componentProps: {
-        id_postagem: this.idpostagem,
-        id_user: this.user.uid,
-        id_user_post: this.id_user_postagem
-      },
-      event: ev
-    });
-    popover.present();
   }
 }

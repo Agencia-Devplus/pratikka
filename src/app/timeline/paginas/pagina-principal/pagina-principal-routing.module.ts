@@ -19,21 +19,20 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'postagens',
-        children: [
-          {
-            path: '',
-            loadChildren: () =>
-              import('../postagens/postagens.module').then(m => m.PostagensPageModule)
-          }
-        ]
-      },
-      {
         path: 'perfil',
         children: [
           {
             path: '',
             loadChildren: () => import('../perfil/perfil.module').then(m => m.PerfilPageModule)
+          }
+        ]
+      },
+      {
+        path: 'add-postagem',
+        children: [
+          {
+            path: '',
+            loadChildren: () => import('../add-postagem/add-postagem.module').then(m => m.AddPostagemPageModule)
           }
         ]
       },
@@ -55,4 +54,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class PaginaPrincipalPageRoutingModule {}
+export class PaginaPrincipalPageRoutingModule { }

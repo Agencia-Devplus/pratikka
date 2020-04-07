@@ -1,57 +1,39 @@
-  <ion-header>
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="/inicio/painel/postagens"></ion-back-button>
-    </ion-buttons>
-  </ion-header>  
-    
-<ion-content>
-  
-</ion-content>
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-img src="assets/img/prattika-logo.png" class="logo"></ion-img>
+    </ion-toolbar>
+</ion-header>
 
-<ion-tabs>
-  <ion-tab-bar slot="bottom">
+<super-tabs [config]="configs">
+    <super-tabs-toolbar slot="top">
+        <super-tab-button>
+            <ion-label>Texto</ion-label>
+        </super-tab-button>
+        <super-tab-button>
+            <ion-label>Vídeo</ion-label>
+        </super-tab-button>
+        <super-tab-button>
+            <ion-label>Podcast</ion-label>
+        </super-tab-button>
+    </super-tabs-toolbar>
 
-    <ion-tab-button tab="texto">
-      <ion-icon name="text"></ion-icon>
-      <ion-label>texto</ion-label>
-    </ion-tab-button>
+    <super-tabs-container>
+        <super-tab>
+            <ion-content>
+                <ion-nav [root]="textoPage"></ion-nav>
+            </ion-content>
+        </super-tab>
 
-    <ion-tab-button tab="video">
-      <ion-icon name="videocam"></ion-icon>
-      <ion-label>video</ion-label>
-    </ion-tab-button>
+        <super-tab>
+            <ion-content>
+                <ion-nav [root]="videoPage"></ion-nav>
+            </ion-content>
+        </super-tab>
 
-    <ion-tab-button tab="podcast">
-      <ion-icon name="mic"></ion-icon>
-      <ion-label>Podcast</ion-label>
-    </ion-tab-button>
-
-  </ion-tab-bar>
-</ion-tabs>
-
-  <!-- <ion-grid fixed>
-    <ion-row>
-      <ion-item>
-        <ion-input placeholder="Enter Titulo" [(ngModel)]="postagemTitulo"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-input placeholder="Enter Texto" [(ngModel)]="postagemTexto"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-input placeholder="Enter Capa" [(ngModel)]="postagemCapa"></ion-input>
-      </ion-item>
-    </ion-row>
-    <ion-row>
-      <ion-col class="ion-text-center">
-        <ion-button (click)="criarPostagem()" [disabled]="!postagemTitulo || !postagemTexto || !postagemCapa">
-          Publicar
-        </ion-button>
-      </ion-col>
-    </ion-row>
-  </ion-grid> -->
-
-
-
-
-
-
+        <super-tab>
+            <ion-content>
+                <ion-nav [root]="podcastPage"></ion-nav>
+            </ion-content>
+        </super-tab>
+    </super-tabs-container>
+</super-tabs>

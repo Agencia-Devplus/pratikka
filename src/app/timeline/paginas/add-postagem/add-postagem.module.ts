@@ -1,22 +1,27 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-
-import { IonicModule } from '@ionic/angular';
-
-import { AddPostagemPageRoutingModule } from './add-postagem-routing.module';
-
 import { AddPostagemPage } from './add-postagem.page';
 import { CompartilhadoModule } from 'src/app/compartilhado/compartilhado.module';
+import { SuperTabsModule } from '@ionic-super-tabs/angular';
+import { RouterModule } from '@angular/router';
+import { TextoPageModule } from '../texto/texto.module';
+import { PodcastPageModule } from '../podcast/podcast.module';
+import { VideoPageModule } from '../video/video.module';
 
 @NgModule({
   imports: [
+    TextoPageModule,
+    PodcastPageModule,
+    VideoPageModule,
+    SuperTabsModule,
     CompartilhadoModule,
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    AddPostagemPageRoutingModule
+    RouterModule.forChild([
+      {
+        path: '',
+        component: AddPostagemPage,
+      },
+    ])
+
   ],
   declarations: [AddPostagemPage]
 })
-export class AddPostagemPageModule {}
+export class AddPostagemPageModule { }

@@ -48,7 +48,7 @@
                             </ion-note>
                         </ion-item>
                         <div style="margin-top: 10px;">
-                            <ion-button type="submit" expand="full" [disabled]="formLogin.invalid">
+                            <ion-button type="submit" expand="full" [disabled]="!formLogin.valid">
                                 {{configs.acao}}
                             </ion-button>
                             <ion-button style="color: white;" expand="full" fill="clear" (click)="mudarAuthAcao()">

@@ -12,42 +12,12 @@ const routes: Routes = [
         path: '',
         loadChildren: './paginas/pagina-principal/pagina-principal.module#PaginaPrincipalPageModule'
 
-      },
-      {
-        path: 'add-postagem',
-        children: [
-          {
-            path: '',
-            loadChildren: () =>
-              import('../timeline/paginas/add-postagem/add-postagem.module').then(m => m.AddPostagemPageModule)
-          }
-        ]
-      },
-      {
-        path: 'detalhes-popover',
-        children: [
-          {
-            path: '',
-            loadChildren: () => import('./paginas/detalhes-popover/detalhes-popover.module').then(m => m.DetalhesPopoverPageModule)
-          }
-        ]
       }
     ]
   },
   {
-    path: 'texto',
-    loadChildren: () => import('./paginas/texto/texto.module').then(m => m.TextoPageModule)
-  },
-  {
-    path: 'video',
-    loadChildren: () => import('./paginas/video/video.module').then(m => m.VideoPageModule)
-  },
-  {
-    path: 'podcast',
-    loadChildren: () => import('./paginas/podcast/podcast.module').then(m => m.PodcastPageModule)
-  },
-  {
     path: 'detalhes/:id',
+    canActivate: [AuthGuard],
     loadChildren: () => import('./paginas/detalhes/detalhes.module').then(m => m.DetalhesPageModule)
   }
 ];

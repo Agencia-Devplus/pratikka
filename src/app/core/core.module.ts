@@ -15,8 +15,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { MediaCapture } from '@ionic-native/media-capture/ngx';
 import { Media } from '@ionic-native/media/ngx';
 import { IonicStorageModule } from '@ionic/storage/';
-import { DetalhesPopoverPageModule } from '../timeline/paginas/detalhes-popover/detalhes-popover.module';
-import { FormsModule } from '@angular/forms';
+import { SuperTabsModule } from "@ionic-super-tabs/angular";
 
 
 
@@ -35,7 +34,7 @@ import { FormsModule } from '@angular/forms';
       synchronizeTabs: true
     }),
     IonicStorageModule.forRoot(),
-    DetalhesPopoverPageModule
+    SuperTabsModule.forRoot()
   ],
   exports: [
     BrowserModule,

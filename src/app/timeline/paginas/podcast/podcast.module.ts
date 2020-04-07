@@ -1,20 +1,14 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-
-import { IonicModule } from '@ionic/angular';
-
 import { PodcastPageRoutingModule } from './podcast-routing.module';
-
 import { PodcastPage } from './podcast.page';
+import { CompartilhadoModule } from 'src/app/compartilhado/compartilhado.module';
 
 @NgModule({
   imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    PodcastPageRoutingModule
+    CompartilhadoModule
   ],
-  declarations: [PodcastPage]
+  declarations: [PodcastPage],
+  exports: [PodcastPage],
+  entryComponents: [PodcastPage]
 })
-export class PodcastPageModule {}
+export class PodcastPageModule { }

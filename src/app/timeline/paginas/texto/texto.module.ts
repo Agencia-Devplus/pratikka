@@ -1,20 +1,14 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-
-import { IonicModule } from '@ionic/angular';
-
 import { TextoPageRoutingModule } from './texto-routing.module';
-
 import { TextoPage } from './texto.page';
+import { CompartilhadoModule } from 'src/app/compartilhado/compartilhado.module';
 
 @NgModule({
   imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    TextoPageRoutingModule
+    CompartilhadoModule,
   ],
-  declarations: [TextoPage]
+  declarations: [TextoPage],
+  exports: [TextoPage],
+  entryComponents: [TextoPage]
 })
-export class TextoPageModule {}
+export class TextoPageModule { }

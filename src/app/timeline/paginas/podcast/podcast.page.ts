@@ -1,47 +1,39 @@
 import { Component, OnInit } from '@angular/core';
-import { MediaCapture } from '@ionic-native/media-capture/ngx';
-import { Storage } from '@ionic/storage';
-
-const MEDIA_FILES_KEY = 'mediaFiles';
-
+import { MediaCapture, CaptureVideoOptions, CaptureAudioOptions } from '@ionic-native/media-capture/ngx';
+import { OverlayService } from 'src/app/core/services/overlay.service';
 @Component({
   selector: 'app-podcast',
   templateUrl: './podcast.page.html',
   styleUrls: ['./podcast.page.scss'],
 })
 export class PodcastPage implements OnInit {
-  mediaFiles = [];
 
-  constructor(private mediaCapture: MediaCapture,
-    private storage: Storage) { }
+
+  constructor(
+    private mediaCapture: MediaCapture,
+    private overlay: OverlayService
+  ) { }
 
   ngOnInit() {
-    this.captureAudio();
+
   }
 
   ionViewDidLoad() {
-    this.storage.get(MEDIA_FILES_KEY).then(res => {
-      this.mediaFiles = JSON.parse(res) || [];
-    });
+
   }
 
-  captureAudio() {
-    this.mediaCapture.captureAudio().then(res => {
-      this.storeMediaFiles(res);
-    });
-  }
+  capturarAudio() {
+    let opcoes: CaptureAudioOptions = {
+      limit: 1,
+      duration: 30
+    }
+    try {
+      this.mediaCapture.captureAudio().then(() => { })
+    } catch (e) {
+      this.overlay.alert({
+        message: "Erro ao capturar áudio: " + e
+      })
+    }
 
-  storeMediaFiles(files) {
-    this.storage.get(MEDIA_FILES_KEY).then(res => {
-      if (res) {
-        let arr = JSON.parse(res);
-        arr = arr.concat(files);
-        this.storage.set(MEDIA_FILES_KEY, JSON.stringify(arr));
-      } else {
-        this.storage.set(MEDIA_FILES_KEY, JSON.stringify(files))
-      }
-      this.mediaFiles = this.mediaFiles.concat(files);
-    })
   }
-
 }
