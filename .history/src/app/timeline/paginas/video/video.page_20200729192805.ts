@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MediaCapture, MediaFile, CaptureError, CaptureAudioOptions } from '@ionic-native/media-capture/ngx';
+import { MediaCapture, CaptureVideoOptions, MediaFile, CaptureError } from '@ionic-native/media-capture/ngx';
 import { OverlayService } from 'src/app/core/services/overlay.service';
 import { File, FileEntry } from '@ionic-native/File/ngx';
 import { Platform, ActionSheetController } from '@ionic/angular';
@@ -7,21 +7,19 @@ import { StreamingMedia } from '@ionic-native/streaming-media/ngx';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { CrudService } from 'src/app/core/services/crud.service';
-import { Media, MediaObject } from '@ionic-native/media/ngx';
 
-const MEDIA_FOLDER_NAME = 'prattika_audios';
+const MEDIA_FOLDER_NAME = 'Prattika Videos';
 
 @Component({
-  selector: 'app-podcast',
-  templateUrl: './podcast.page.html',
-  styleUrls: ['./podcast.page.scss'],
+  selector: 'app-video',
+  templateUrl: './video.page.html',
+  styleUrls: ['./video.page.scss']
 })
-export class PodcastPage implements OnInit {
+export class VideoPage implements OnInit {
   user: firebase.User;
   arquivos = [];
-  audioFullPath = "";
-  urlDownloadAudio = "";
-
+  videoFullPath = "";
+  urlDownloadVideo = "";
 
   constructor(
     private auth: AuthService,
@@ -32,15 +30,15 @@ export class PodcastPage implements OnInit {
     private acoes: ActionSheetController,
     private play: StreamingMedia,
     private storage: AngularFireStorage,
-    private crud: CrudService,
-    private media: Media
+    private crud: CrudService
+
   ) {
     this.auth.authState$.subscribe(user => (this.user = user));
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.plt.ready().then(() => {
-      let path = this.file.externalApplicationStorageDirectory;
+      const path = this.file.externalApplicationStorageDirectory;
       this.file.checkDir(path, MEDIA_FOLDER_NAME).then(
         () => {
           this.carregarArquivos();
@@ -61,10 +59,30 @@ export class PodcastPage implements OnInit {
     );
   }
 
-  capturarAudio() {
-    this.mediaCapture.captureAudio().then((audio: MediaFile[]) => {
-      this.copiarParaDiretorioLocal(audio[0].fullPath);
-    })
+  ionViewDidLoad() {
+
+  }
+
+  capturarVideo() {
+    const opcoes: CaptureVideoOptions = {
+      limit: 1,
+      duration: 30,
+      quality: 50
+    }
+
+    try {
+      this.mediaCapture.captureVideo(opcoes).then((video: MediaFile[]) => {
+        if (video.length > 0) {
+          this.copiarParaDiretorioLocal(video[0].fullPath);
+        }
+      },
+        (err: CaptureError) => console.error(err)
+      )
+    } catch (e) {
+      this.overlay.alert({
+        message: "Erro na captura de vídeo: " + e
+      })
+    }
   }
 
   copiarParaDiretorioLocal(fullPath) {
@@ -82,19 +100,17 @@ export class PodcastPage implements OnInit {
     const copyFrom = myPath.substr(0, myPath.lastIndexOf('/') + 1);
     const copyTo = this.file.externalApplicationStorageDirectory + MEDIA_FOLDER_NAME;
 
-    this.file.resolveLocalFilesystemUrl(copyFrom + name).then(
-      (entry: any) => {
-        console.log('entry', entry);
-
-        this.file.resolveLocalFilesystemUrl(copyTo).then(
-          (dirEntry: any) => {
-            entry.copyTo(dirEntry, newName);
-            this.carregarArquivos();
-          }).catch(error => console.log(error))
-      }).catch(error => console.log(error));
+    this.file.copyFile(copyFrom, name, copyTo, newName).then(
+      success => {
+        this.carregarArquivos();
+      },
+      error => {
+        console.log('error: ', error);
+      }
+    );
   }
 
-  async postarAudio(titulo: any, arquivo: FileEntry) {
+  async postarVideo(titulo: any, arquivo: FileEntry) {
     const loading = await this.overlay.loading();
     loading.present();
     const path = arquivo.nativeURL.substr(0, arquivo.nativeURL.lastIndexOf('/') + 1);
@@ -108,30 +124,30 @@ export class PodcastPage implements OnInit {
     try {
 
       const ref = this.storage.ref(
-        'prattika/' + this.user.uid + '/audios/' + randomId + new Date().getTime() + '.mp3'
+        'prattika/' + this.user.uid + '/videos/' + randomId + new Date().getTime() + '.' + 'mp4'
       );
 
       await ref.put(fileBlob).then(snapshot => {
-        this.audioFullPath = snapshot.metadata.fullPath;
+        this.videoFullPath = snapshot.metadata.fullPath;
       }).then(async () => {
         await ref.getDownloadURL().toPromise().then(url =>
-          this.urlDownloadAudio = url
+          this.urlDownloadVideo = url
         )
       })
 
       let dados = {
         titulo: titulo,
-        urlDownload: this.urlDownloadAudio,
-        fullPath: this.audioFullPath,
+        urlDownload: this.urlDownloadVideo,
+        fullPath: this.videoFullPath,
         id_usuario: this.user.uid,
         nomeUsuario: this.user.displayName
       }
 
-      this.crud.novaPostagemMidiaAudio(dados);
-      this.removerAudio(arquivo);
+      this.crud.novaPostagemMidia(dados);
+      this.removerVideo(arquivo);
 
       this.overlay.toast({
-        message: 'Podcast postado!',
+        message: 'Vídeo postado!',
         buttons: [
           {
             text: 'OK'
@@ -157,7 +173,7 @@ export class PodcastPage implements OnInit {
     else if (fileExt == 'MOV') return { type: 'video/quicktime' };
   }
 
-  removerAudio(arquivo: FileEntry) {
+  removerVideo(arquivo: FileEntry) {
     const path = arquivo.nativeURL.substr(0, arquivo.nativeURL.lastIndexOf('/') + 1);
     this.file.removeFile(path, arquivo.name).then(() => {
       this.carregarArquivos();
@@ -168,17 +184,17 @@ export class PodcastPage implements OnInit {
     const acao = await this.acoes.create({
       header: arquivo.name,
       buttons: [{
-        text: 'Ouvir Áudio',
+        text: 'Ver Video',
         icon: 'play-sharp',
         handler: () => {
-          this.play.playAudio(arquivo.nativeURL)
+          this.play.playVideo(arquivo.nativeURL)
         }
       },
       {
         text: 'Postar',
         icon: 'arrow-up',
         handler: () => {
-          console.log('Postar Áudio')
+          console.log('Postar Vídeo')
           //this.postarVideo(arquivo);
           this.overlay.alert({
             header: 'Insira um título',
@@ -197,7 +213,7 @@ export class PodcastPage implements OnInit {
               {
                 text: 'Prosseguir',
                 handler: (data) => {
-                  this.postarAudio(data.titulo, arquivo)
+                  this.postarVideo(data.titulo, arquivo)
                 }
               }
             ]
@@ -205,11 +221,11 @@ export class PodcastPage implements OnInit {
         }
       },
       {
-        text: 'Remover Áudio',
+        text: 'Remover Vídeo',
         role: 'destructive',
         icon: 'trash',
         handler: () => {
-          this.removerAudio(arquivo);
+          this.removerVideo(arquivo);
         }
       },
       {
@@ -224,6 +240,4 @@ export class PodcastPage implements OnInit {
     });
     await acao.present();
   }
-
-
 }

@@ -5,6 +5,7 @@ import * as firebase from 'firebase';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { PopoverController, NavController, LoadingController } from '@ionic/angular';
 import { OverlayService } from 'src/app/core/services/overlay.service';
+import { AngularFireStorage } from '@angular/fire/storage';
 
 @Component({
   selector: 'app-detalhes',
@@ -20,9 +21,9 @@ export class DetalhesPage implements OnInit {
   constructor(private crudService: CrudService,
     public route: ActivatedRoute,
     private auth: AuthService,
-    private popoverController: PopoverController,
     private navCtrl: NavController,
-    private overlay: OverlayService
+    private overlay: OverlayService,
+    private storage: AngularFireStorage
   ) {
     this.auth.authState$.subscribe(user => (this.user = user));
     this.route.paramMap.subscribe((params: ParamMap) => {
@@ -55,16 +56,16 @@ export class DetalhesPage implements OnInit {
 
   editarPostagem(postagem) {
     postagem.isEdit = true;
-    postagem.editTitulo = postagem.Titulo;
-    postagem.editTexto = postagem.Texto;
+    postagem.editTitulo = postagem.titulo;
+    postagem.editTexto = postagem.texto;
     //postagem.editCapa = postagem.Capa;
   }
 
   async salvarEdicao(postagem) {
     const loading = await this.overlay.loading();
     let record = {};
-    record['Titulo'] = postagem.editTitulo;
-    record['Texto'] = postagem.editTexto;
+    record['titulo'] = postagem.editTitulo;
+    record['texto'] = postagem.editTexto;
     //record['Capa'] = postagem.editCapa;
     try {
       this.crudService.update_Postagem(this.idpostagem, record);
@@ -80,13 +81,14 @@ export class DetalhesPage implements OnInit {
     postagem.isEdit = false;
   }
 
-  async removerPostagem() {
+  async removerPostagem(fullPath) {
     await this.overlay.alert({
       message: 'Deseja realmente apagar essa postagem?',
       buttons: [{
         text: 'Sim',
         handler: async () => {
           this.crudService.delete_Postagem(this.idpostagem);
+          this.storage.ref(fullPath).delete();
           this.navCtrl.pop();
         }
       },

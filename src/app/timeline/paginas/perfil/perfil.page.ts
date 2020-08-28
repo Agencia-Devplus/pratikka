@@ -48,10 +48,11 @@ export class PerfilPage implements OnInit {
         return {
           id: e.payload.doc.id,
           isEdit: false,
-          Titulo: e.payload.doc.data()['Titulo'],
-          Texto: e.payload.doc.data()['Texto'],
-          Capa: e.payload.doc.data()['Capa'],
-          Usuario: e.payload.doc.data()['Usuario']
+          titulo: e.payload.doc.data()['titulo'],
+          texto: e.payload.doc.data()['texto'],
+          capa: e.payload.doc.data()['capa'],
+          usuario: e.payload.doc.data()['usuario'],
+          tipo: e.payload.doc.data()['tipo']
         };
       })
       console.log(this.postagens);
@@ -75,27 +76,6 @@ export class PerfilPage implements OnInit {
       /*const fileURI: string =*/ await this.camera.getPicture(opcoes).then((imageData) => {
       this.cropImage(imageData);
     })
-
-      /*
-      let file: string;
-
-      if (this.platform.is('ios')) {
-        file = fileURI.split('/').pop();
-      } else {
-        file = fileURI.substring(fileURI.lastIndexOf('/') + 1, fileURI.indexOf('?'));
-        this.crop.crop(file, { quality: 70 }).then((caminho) => {
-          this.urlCroppedIMG = caminho;
-        })
-      }
-
-      const path: string = fileURI.substring(0, fileURI.lastIndexOf('/'));
-      const buffer: ArrayBuffer = await this.file.readAsArrayBuffer(path, file);
-      const blob: Blob = new Blob([buffer], { type: 'image/jpeg' });
-
-      this.uploadPic(blob);
-      */
-
-
     } catch (e) {
       this.overlay.toast({
         message: 'Erro: ' + e

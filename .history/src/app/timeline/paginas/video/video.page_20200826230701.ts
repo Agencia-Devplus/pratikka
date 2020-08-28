@@ -1,23 +1,23 @@
-import { Component, OnInit } from '@angular/core';
-import { OverlayService } from 'src/app/core/services/overlay.service';
-import { File, FileEntry } from '@ionic-native/File/ngx';
-import { AngularFireStorage } from '@angular/fire/storage';
-import { AuthService } from 'src/app/core/services/auth.service';
-import { CrudService } from 'src/app/core/services/crud.service';
-import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+import { Component, OnInit } from "@angular/core";
+import { OverlayService } from "src/app/core/services/overlay.service";
+import { File, FileEntry } from "@ionic-native/File/ngx";
+import { AngularFireStorage } from "@angular/fire/storage";
+import { AuthService } from "src/app/core/services/auth.service";
+import { CrudService } from "src/app/core/services/crud.service";
+import { Camera, CameraOptions } from "@ionic-native/camera/ngx";
 
-const MEDIA_FOLDER_NAME = 'Prattika Videos';
+const MEDIA_FOLDER_NAME = "Prattika Videos";
 
 @Component({
-  selector: 'app-video',
-  templateUrl: './video.page.html',
-  styleUrls: ['./video.page.scss'],
+  selector: "app-video",
+  templateUrl: "./video.page.html",
+  styleUrls: ["./video.page.scss"],
 })
 export class VideoPage implements OnInit {
   user: firebase.User;
   arquivos = [];
-  videoFullPath = '';
-  urlDownloadVideo = '';
+  videoFullPath = "";
+  urlDownloadVideo = "";
   nomeArquivo: any;
 
   constructor(
@@ -43,23 +43,23 @@ export class VideoPage implements OnInit {
 
     this.camera.getPicture(options).then((video) => {
       this.overlay.alert({
-        header: 'Qual o título do vídeo?',
+        header: "Qual o título do vídeo?",
         inputs: [
           {
-            name: 'titulo',
-            type: 'text',
-            placeholder: 'Ex: Meu novo vídeo',
+            name: "Titulo",
+            type: "text",
+            placeholder: "Ex: Meu novo vídeo",
           },
         ],
         buttons: [
           {
-            text: 'Cancelar',
-            role: 'cancel',
+            text: "Cancelar",
+            role: "cancel",
           },
           {
-            text: 'Enviar',
-            handler: (data) => {
-              this.postarVideo(video, data.titulo);
+            text: "Enviar",
+            handler: (titulo) => {
+              this.postarVideo(video, titulo);
             },
           },
         ],
@@ -69,35 +69,35 @@ export class VideoPage implements OnInit {
 
   async postarVideo(videoURI, titulo) {
     const loading = await this.overlay.loading();
-    loading.present();
+    loading.present();   
 
     await this.file
-      .resolveLocalFilesystemUrl('file://' + videoURI)
+      .resolveLocalFilesystemUrl("file://" + videoURI)
       .then((fileEntry) => {
         this.nomeArquivo = fileEntry;
       });
 
-    const path = this.nomeArquivo.nativeURL.substring(
+    let path = this.nomeArquivo.nativeURL.substring(
       0,
-      this.nomeArquivo.nativeURL.lastIndexOf('/')
+      this.nomeArquivo.nativeURL.lastIndexOf("/")
     );
 
     const buffer = await this.file.readAsArrayBuffer(
       path,
       this.nomeArquivo.name
     );
-    const fileBlob = new Blob([buffer], { type: 'video/mp4' });
+    const fileBlob = new Blob([buffer], { type: "video/mp4" });
 
     const randomId = Math.random().toString(36).substring(2, 8);
     try {
       const ref = this.storage.ref(
-        'prattika/' +
+        "prattika/" +
           this.user.uid +
-          '/videos/' +
+          "/videos/" +
           randomId +
           new Date().getTime() +
-          '.' +
-          'mp4'
+          "." +
+          "mp4"
       );
 
       await ref
@@ -123,17 +123,17 @@ export class VideoPage implements OnInit {
       this.crud.novaPostagemMidia(dados);
 
       this.overlay.toast({
-        message: 'Vídeo postado!',
+        message: "Vídeo postado!",
         buttons: [
           {
-            text: 'OK',
+            text: "OK",
           },
         ],
       });
     } catch (e) {
       this.overlay.alert({
         message: e,
-        buttons: ['OK'],
+        buttons: ["OK"],
       });
     } finally {
       loading.dismiss();

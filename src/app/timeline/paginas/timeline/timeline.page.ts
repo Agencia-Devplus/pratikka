@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { CrudService } from 'src/app/core/services/crud.service';
+import { StreamingMedia, StreamingVideoOptions } from '@ionic-native/streaming-media/ngx';
+import { IonSlides, NavController } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-timeline',
@@ -7,15 +10,40 @@ import { CrudService } from 'src/app/core/services/crud.service';
   styleUrls: ['./timeline.page.scss'],
 })
 export class TimelinePage implements OnInit {
-
-  slidesOptions = {
-    spaceBetween: 0,
-    slidesPerView: 1.50,
-  };
-
+  @ViewChild('slides-artigos', null) slidesArt: IonSlides;
+  @ViewChild('slides-videos', null) slidesVid: IonSlides;
+  @ViewChild('slides-podcasts', null) slidesPodcasts: IonSlides;
+  slidesArtOptions: any;
+  slidesVidOptions: any;
+  slidesPodOptions: any;
   postagens: any;
 
-  constructor(private crudService: CrudService) { }
+  constructor(
+    private crudService: CrudService,
+    private streamingMedia: StreamingMedia,
+    private nav: NavController
+  ) {
+    this.slidesArtOptions = {
+      initialSlide: 0,
+      slidesPerView: 1.75,
+      effect: 'fade',
+      autoHeight: true
+    };
+
+    this.slidesVidOptions = {
+      initialSlide: 0,
+      slidesPerView: 1,
+      effect: 'fade',
+      autoHeight: true
+    };
+
+    this.slidesPodOptions = {
+      initialSlide: 0,
+      slidesPerView: 1,
+      effect: 'fade',
+      autoHeight: true
+    };
+  }
 
   ngOnInit() {
     setTimeout(() => {
@@ -25,17 +53,28 @@ export class TimelinePage implements OnInit {
 
   lerPostagens() {
     this.crudService.read_Postagens().subscribe(data => {
-
       this.postagens = data.map(e => {
         return {
           id: e.payload.doc.id,
           isEdit: false,
-          Titulo: e.payload.doc.data()['Titulo'],
-          Texto: e.payload.doc.data()['Texto'],
-          Capa: e.payload.doc.data()['Capa'],
-          Usuario: e.payload.doc.data()['Usuario'],
+          titulo: e.payload.doc.data()['titulo'],
+          texto: e.payload.doc.data()['texto'],
+          capa: e.payload.doc.data()['capa'],
+          usuario: e.payload.doc.data()['usuario'],
+          tipo: e.payload.doc.data()['tipo']
         };
       })
     });
   }
+
+  play(postagem) {
+    /*let options: StreamingVideoOptions = {
+      shouldAutoClose: true,
+      controls: true
+    };
+    this.streamingMedia.playVideo(capa, options);*/
+
+    this.nav.navigateForward('/inicio/detalhes/' + postagem.id);
+  }
+
 }

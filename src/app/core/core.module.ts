@@ -16,11 +16,7 @@ import { MediaCapture } from '@ionic-native/media-capture/ngx';
 import { Media } from '@ionic-native/media/ngx';
 import { IonicStorageModule } from '@ionic/storage/';
 import { SuperTabsModule } from "@ionic-super-tabs/angular";
-
-
-
-
-
+import { StreamingMedia } from '@ionic-native/streaming-media/ngx';
 
 @NgModule({
   declarations: [],
@@ -45,6 +41,7 @@ import { SuperTabsModule } from "@ionic-super-tabs/angular";
     Crop,
     File,
     MediaCapture,
+    StreamingMedia,
     Media,
     StatusBar,
     SplashScreen,

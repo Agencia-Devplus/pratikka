@@ -18,7 +18,6 @@ export class VideoPage implements OnInit {
   arquivos = [];
   videoFullPath = '';
   urlDownloadVideo = '';
-  nomeArquivo: any;
 
   constructor(
     private auth: AuthService,
@@ -33,6 +32,17 @@ export class VideoPage implements OnInit {
 
   ngOnInit() {}
 
+  carregarArquivos() {
+    this.file
+      .listDir(this.file.externalApplicationStorageDirectory, MEDIA_FOLDER_NAME)
+      .then(
+        (res) => {
+          this.arquivos = res;
+        },
+        (err) => console.log('error loading files: ', err)
+      );
+  }
+
   ionViewDidLoad() {}
 
   capturarVideo() {
@@ -41,52 +51,22 @@ export class VideoPage implements OnInit {
       sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
     };
 
-    this.camera.getPicture(options).then((video) => {
-      this.overlay.alert({
-        header: 'Qual o título do vídeo?',
-        inputs: [
-          {
-            name: 'titulo',
-            type: 'text',
-            placeholder: 'Ex: Meu novo vídeo',
-          },
-        ],
-        buttons: [
-          {
-            text: 'Cancelar',
-            role: 'cancel',
-          },
-          {
-            text: 'Enviar',
-            handler: (data) => {
-              this.postarVideo(video, data.titulo);
-            },
-          },
-        ],
-      });
+    this.camera.getPicture(options).then(video => {
+      
     });
+
   }
 
-  async postarVideo(videoURI, titulo) {
+  async postarVideo(titulo: any, arquivo: FileEntry) {
     const loading = await this.overlay.loading();
     loading.present();
-
-    await this.file
-      .resolveLocalFilesystemUrl('file://' + videoURI)
-      .then((fileEntry) => {
-        this.nomeArquivo = fileEntry;
-      });
-
-    const path = this.nomeArquivo.nativeURL.substring(
+    const path = arquivo.nativeURL.substr(
       0,
-      this.nomeArquivo.nativeURL.lastIndexOf('/')
+      arquivo.nativeURL.lastIndexOf('/') + 1
     );
-
-    const buffer = await this.file.readAsArrayBuffer(
-      path,
-      this.nomeArquivo.name
-    );
-    const fileBlob = new Blob([buffer], { type: 'video/mp4' });
+    const type = this.getMimeType(arquivo.name.split('.').pop());
+    const buffer = await this.file.readAsArrayBuffer(path, arquivo.name);
+    const fileBlob = new Blob([buffer], type);
 
     const randomId = Math.random().toString(36).substring(2, 8);
     try {
@@ -139,4 +119,13 @@ export class VideoPage implements OnInit {
       loading.dismiss();
     }
   }
+
+  getMimeType(fileExt) {
+    if (fileExt == 'wav') { return { type: 'audio/wav' }; }
+    else if (fileExt == 'jpg') { return { type: 'image/jpg' }; }
+    else if (fileExt == 'mp4') { return { type: 'video/mp4' }; }
+    else if (fileExt == 'MOV') { return { type: 'video/quicktime' }; }
+  }
+
+
 }

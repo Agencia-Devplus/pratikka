@@ -68,12 +68,10 @@
                 <div class=" element-gallery pdl-5 pdr-5" *ngFor="let postagem of postagens ">
                     <div class="wrap-element shadow-2" [routerLink]="['/inicio/detalhes/' + postagem.id]" routerdirection="forward">
                         <div class="thumb-view">
-                            <img [src]="postagem.Capa ">
+                            <img [src]="postagem.capa" *ngIf="postagem.tipo == 'texto'">
+                            <img src="https://www.srlupa.com.br/static/images/video/no_thumbnail_video.jpg" *ngIf="postagem.tipo == 'video'" />
+                            <ion-icon name="mic" *ngIf="postagem.tipo == 'audio'"></ion-icon>
                         </div>
-                        <!-- <div class="pd-10 txt-info txt-light ">
-                                <h4 class="ellipsis fs-12 fw-600 spacing1 pdb-2 uppercase ion-no-margin ">{{ postagem.Titulo }}</h4>
-                                <p class="ellipsis fs-12 ion-no-margin ">{{ postagem.Texto }}</p>
-                            </div> -->
                     </div>
                 </div>
             </div>

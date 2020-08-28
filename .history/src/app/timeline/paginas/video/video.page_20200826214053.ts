@@ -18,7 +18,6 @@ export class VideoPage implements OnInit {
   arquivos = [];
   videoFullPath = '';
   urlDownloadVideo = '';
-  nomeArquivo: any;
 
   constructor(
     private auth: AuthService,
@@ -33,6 +32,17 @@ export class VideoPage implements OnInit {
 
   ngOnInit() {}
 
+  carregarArquivos() {
+    this.file
+      .listDir(this.file.externalApplicationStorageDirectory, MEDIA_FOLDER_NAME)
+      .then(
+        (res) => {
+          this.arquivos = res;
+        },
+        (err) => console.log('error loading files: ', err)
+      );
+  }
+
   ionViewDidLoad() {}
 
   capturarVideo() {
@@ -46,7 +56,7 @@ export class VideoPage implements OnInit {
         header: 'Qual o título do vídeo?',
         inputs: [
           {
-            name: 'titulo',
+            name: 'Titulo',
             type: 'text',
             placeholder: 'Ex: Meu novo vídeo',
           },
@@ -58,8 +68,8 @@ export class VideoPage implements OnInit {
           },
           {
             text: 'Enviar',
-            handler: (data) => {
-              this.postarVideo(video, data.titulo);
+            handler: (titulo) => {
+              this.postarVideo(video, titulo);
             },
           },
         ],
@@ -67,26 +77,14 @@ export class VideoPage implements OnInit {
     });
   }
 
-  async postarVideo(videoURI, titulo) {
+  async postarVideo(videoURL, titulo) {
     const loading = await this.overlay.loading();
-    loading.present();
+    // loading.present();
 
-    await this.file
-      .resolveLocalFilesystemUrl('file://' + videoURI)
-      .then((fileEntry) => {
-        this.nomeArquivo = fileEntry;
-      });
+    const path = videoURL.substring(videoURL.lastIndexOf('/') + 1, videoURL.indexOf('?'));
 
-    const path = this.nomeArquivo.nativeURL.substring(
-      0,
-      this.nomeArquivo.nativeURL.lastIndexOf('/')
-    );
-
-    const buffer = await this.file.readAsArrayBuffer(
-      path,
-      this.nomeArquivo.name
-    );
-    const fileBlob = new Blob([buffer], { type: 'video/mp4' });
+    const buffer = await this.file.readAsArrayBuffer(path, videoURL);
+    const fileBlob = new Blob([buffer], {type: 'video/mp4'});
 
     const randomId = Math.random().toString(36).substring(2, 8);
     try {
@@ -137,6 +135,6 @@ export class VideoPage implements OnInit {
       });
     } finally {
       loading.dismiss();
-    }
+    } 
   }
 }

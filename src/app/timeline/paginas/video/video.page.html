@@ -1,5 +1,17 @@
 <ion-content class="ion-padding">
-    <ion-item>
-        <ion-button (click)="capturarVideo()">Iniciar Captura</ion-button>
-    </ion-item>
+    <ion-list>
+        <ion-item *ngFor="let arquivo of arquivos" (click)="folhaAcoes(arquivo)">
+            <ion-icon name="videocam" slot="start" *ngIf="arquivo.name.endsWith('MOV') || arquivo.name.endsWith('mp4') || arquivo.name.endsWith('3gp')"></ion-icon>
+            <ion-label class="ion-text-wrap">
+                {{ arquivo.name }}
+                <p>{{ arquivo.fullPath }}</p>
+            </ion-label>
+        </ion-item>
+    </ion-list>
+
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+        <ion-fab-button (click)="capturarVideo()">
+            <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
 </ion-content>

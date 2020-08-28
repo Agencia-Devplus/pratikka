@@ -69,7 +69,7 @@ export class VideoPage implements OnInit {
 
   async postarVideo(videoURI, titulo) {
     const loading = await this.overlay.loading();
-    loading.present();
+    loading.present();   
 
     await this.file
       .resolveLocalFilesystemUrl('file://' + videoURI)
@@ -77,7 +77,7 @@ export class VideoPage implements OnInit {
         this.nomeArquivo = fileEntry;
       });
 
-    const path = this.nomeArquivo.nativeURL.substring(
+    let path = this.nomeArquivo.nativeURL.substring(
       0,
       this.nomeArquivo.nativeURL.lastIndexOf('/')
     );

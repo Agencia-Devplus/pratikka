@@ -1,25 +1,34 @@
 <ion-content class="ion-padding">
     <ion-list>
         <div>
-            <img src="assets/img/texto.jpg" />
-            <ion-button fill="outline" style="margin-left: auto; margin-right: auto; display: table;">
-                <ion-icon name="add"></ion-icon>
+            <div *ngIf="!imgSelecionada">
+                <img src="assets/img/texto.jpg" />
+            </div>
+
+            <div *ngIf="imgSelecionada">
+                <img [src]="imgSelecionada" />
+            </div>
+
+            <ion-button (click)="abrirGaleria()" fill="outline " style="margin-left: auto; margin-right: auto; display: table; ">
+                <ion-icon name="add "></ion-icon>
                 Adicionar capa
             </ion-button>
         </div>
+        <form [formGroup]="formGroup">
+            <ion-item>
+                <ion-label>Título</ion-label>
+                <ion-input formControlName="titulo" type="text " placeholder="Digite seu título "></ion-input>
+            </ion-item>
 
-        <ion-item>
-            <ion-label>Título</ion-label>
-            <ion-input type="text" placeholder="Digite seu título"></ion-input>
-        </ion-item>
+            <ion-item>
+                <ion-label>Texto</ion-label>
+                <ion-textarea formControlName="texto" rows="10 "></ion-textarea>
+            </ion-item>
 
-        <ion-item>
-            <ion-label>Texto</ion-label>
-            <ion-textarea rows="10"></ion-textarea>
-        </ion-item>
+
+            <ion-button (click)="enviar()" color="success " expand="full " [disabled]="!formGroup.valid">Postar</ion-button>
+
+        </form>
     </ion-list>
-</ion-content>
 
-<ion-footer>
-    <ion-button color="success" expand="full">Postar</ion-button>
-</ion-footer>
+</ion-content>

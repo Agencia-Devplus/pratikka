@@ -4,58 +4,50 @@
     </ion-toolbar>
 </ion-header>
 
-<ion-content>
-    <!-- Artigos -->
-    <ion-item lines="none">
-        <h2 slot="start">Artigos</h2>
-    </ion-item>
-    <ion-spinner style="display: block; margin: auto;" *ngIf="postagens == null; else ok"></ion-spinner>
-    <ng-template #ok>
-        <ion-slides [options]="slidesOptions">
-            <ion-slide class="center" *ngFor="let postagem of postagens">
-                <ion-card class="ion-text-start" [routerLink]="['/inicio/detalhes/' + postagem.id]" routerdirection="forward">
-                    <img [src]="postagem.Capa">
-                    <ion-card-content>
-                        <span>{{ postagem.Titulo }}</span> <br/>
-                        <span>Autor: {{ postagem.Usuario }}</span>
-                    </ion-card-content>
-                </ion-card>
-            </ion-slide>
-        </ion-slides>
-    </ng-template>
+<ion-content class="ion-padding">
 
+    <h3>Artigos</h3>
 
-    <!-- Fim Artigos -->
-
-    <ion-item lines="none">
-        <h2 slot="start">Vídeos</h2>
-    </ion-item>
-
-    <ion-slides [options]="slidesOptions">
-        <ion-slide class="center" *ngFor="let postagem of postagens">
-            <ion-card class="ion-text-start" [routerLink]="['/inicio/detalhes/' + postagem.id]" routerdirection="forward">
-                <img [src]="postagem.Capa">
+    <ion-slides slidesArt [options]="slidesArtOptions">
+        <ion-slide *ngFor="let postagem of postagens">
+            <ion-card *ngIf="postagem.tipo == 'texto'" class="ion-text-start" [routerLink]="['/inicio/detalhes/' + postagem.id]" routerdirection="forward">
+                <img [src]="postagem.capa" style="max-height: 150px !important; object-fit: cover;" />
                 <ion-card-content>
-                    <span>{{ postagem.Titulo }}</span> <br/>
-                    <span>Autor: {{ postagem.Usuario }}</span>
+                    <span>{{ postagem.titulo }}</span> <br/>
+                    <span>Autor: {{ postagem.usuario }}</span>
                 </ion-card-content>
             </ion-card>
         </ion-slide>
     </ion-slides>
 
-    <ion-item lines="none">
-        <h2 slot="start">Podcasts</h2>
-    </ion-item>
+    <h3>Vídeos</h3>
 
-    <ion-slides [options]="slidesOptions">
-        <ion-slide class="center" *ngFor="let postagem of postagens">
-            <ion-card class="ion-text-start" [routerLink]="['/inicio/detalhes/' + postagem.id]" routerdirection="forward">
-                <img [src]="postagem.Capa">
+    <ion-slides slidesVid [options]="slidesVidOptions">
+        <ion-slide *ngFor="let postagem of postagens">
+            <ion-card *ngIf="postagem.tipo == 'video'" (click)="play(postagem)">
+                <video height="180px" width="180px" style="object-fit: cover;">
+                    <source [src]="postagem.capa" type="video/mp4">
+                </video>
                 <ion-card-content>
-                    <span>{{ postagem.Titulo }}</span> <br/>
-                    <span>Autor: {{ postagem.Usuario }}</span>
+                    <span>{{ postagem.titulo }}</span> <br/>
+                    <span>Autor: {{ postagem.usuario }}</span>
                 </ion-card-content>
             </ion-card>
         </ion-slide>
     </ion-slides>
+
+    <h3>Podcasts</h3>
+
+    <ion-slides slidesPodcasts [options]="slidesPodOptions">
+        <ion-slide *ngFor="let postagem of postagens">
+            <ion-card *ngIf="postagem.tipo == 'audio'" (click)="play(postagem)">
+                <ion-icon name="mic"></ion-icon>
+                <ion-card-content>
+                    <span>{{ postagem.titulo }}</span> <br/>
+                    <span>Autor: {{ postagem.usuario }}</span>
+                </ion-card-content>
+            </ion-card>
+        </ion-slide>
+    </ion-slides>
+
 </ion-content>
